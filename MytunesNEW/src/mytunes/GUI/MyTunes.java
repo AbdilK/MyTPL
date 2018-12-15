@@ -22,7 +22,7 @@ public class MyTunes extends Application
         pStage.centerOnScreen();
         
         
-        Parent root = FXMLLoader.load(getClass().getResource("/mytunes/GUI/view/MainWindow.fxml")); //getClassLoader added to avoid NullPointerException
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("/mytunes/GUI/view/MainWindow.fxml")); //getClassLoader added to avoid NullPointerException
 
         
         Scene scene = new Scene(root);
