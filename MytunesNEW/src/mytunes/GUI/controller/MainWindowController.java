@@ -39,15 +39,15 @@ public class MainWindowController implements Initializable
 {
 
     @FXML
-    private ListView<Songs> listSongsOnPlaylist;
+    private ListView<Songs> tblSongsOnPlaylist;
     @FXML
     private TextField textFieldFilterSearch;
     @FXML
     private Label lblSongTitle;
     @FXML
-    private TableView<Playlists> tablePlaylist;
+    private TableView<Playlists> tblViewPlaylists;
     @FXML
-    private TableView<Songs> tableSongs;
+    private TableView<Songs> tblViewLibrary;
     private boolean isPlaying;
     private boolean muted;
     private Media hit;
@@ -149,9 +149,9 @@ public class MainWindowController implements Initializable
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         genreCol.setCellValueFactory(new PropertyValueFactory<>("genre"));
         durationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
-        tableSongs.getColumns().clear();
-        tableSongs.setItems(songsAsObservable);
-        tableSongs.getColumns().addAll(titleCol, artistCol, genreCol, durationCol);
+        tblViewLibrary.getColumns().clear();
+        tblViewLibrary.setItems(songsAsObservable);
+        tblViewLibrary.getColumns().addAll(titleCol, artistCol, genreCol, durationCol);
        
     }
 
@@ -161,38 +161,38 @@ public class MainWindowController implements Initializable
         playlistNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         playlistSongsCol.setCellValueFactory(new PropertyValueFactory<>("countOfSongsOnPlaylist"));
         playlistDurationCol.setCellValueFactory(new PropertyValueFactory<>("durationOfPlaylist"));
-        tablePlaylist.getColumns().clear();
-        tablePlaylist.setItems(playlistsAsObservable);
-        tablePlaylist.getColumns().addAll(playlistNameCol, playlistSongsCol, playlistDurationCol);
+        tblViewPlaylists.getColumns().clear();
+        tblViewPlaylists.setItems(playlistsAsObservable);
+        tblViewPlaylists.getColumns().addAll(playlistNameCol, playlistSongsCol, playlistDurationCol);
       
     }
 
     @FXML
     private void clickRemoveSongPlaylist(ActionEvent event) 
     {
-        if (listSongsOnPlaylist.getSelectionModel().getSelectedItem() != null)
+        if (tblSongsOnPlaylist.getSelectionModel().getSelectedItem() != null)
         {
-            Songs song = listSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            Songs song = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
             tm.deleteSongFromPlaylistSongs(song.getPlaylistUniqueID());
-            listSongsOnPlaylist.getItems().clear();
-            Playlists playlist = tablePlaylist.getSelectionModel().getSelectedItem();
-            int index = tablePlaylist.getSelectionModel().getSelectedIndex();
+            tblSongsOnPlaylist.getItems().clear();
+            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
+            int index = tblViewPlaylists.getSelectionModel().getSelectedIndex();
             List<Songs> List = tm.getPlaylistSongs(playlist);
-            listSongsOnPlaylist.getItems().addAll(List);
+            tblSongsOnPlaylist.getItems().addAll(List);
             refreshTablePlaylist();
-            tablePlaylist.refresh();
-            tablePlaylist.getSelectionModel().select(index);
+            tblViewPlaylists.refresh();
+            tblViewPlaylists.getSelectionModel().select(index);
         }
     }
 
     @FXML
     private void clickEditSong(ActionEvent event) throws IOException 
     {
-        Songs SongToEdit = tableSongs.getSelectionModel().getSelectedItem();
+        Songs SongToEdit = tblViewLibrary.getSelectionModel().getSelectedItem();
         tm.setSong(SongToEdit);
-        if (tableSongs.getSelectionModel().getSelectedItem() != null)
+        if (tblViewLibrary.getSelectionModel().getSelectedItem() != null)
         {
-            int id = tableSongs.getSelectionModel().getSelectedItem().getsongId();
+            int id = tblViewLibrary.getSelectionModel().getSelectedItem().getsongId();
             String path = "/mytunes/GUI/view/Editsong.fxml";
             boolean IsEditing = true;
             openSongWindow(path, id, IsEditing);
@@ -213,7 +213,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void clickDeleteSong(ActionEvent event) 
     {
-        Songs ToDeleteSong = tableSongs.getSelectionModel().getSelectedItem();
+        Songs ToDeleteSong = tblViewLibrary.getSelectionModel().getSelectedItem();
         if (ToDeleteSong != null)
         {
             String name = ToDeleteSong.getTitle() + " " + ToDeleteSong.getArtist();
@@ -258,11 +258,11 @@ public class MainWindowController implements Initializable
     @FXML
     private void clickEditPlaylist(ActionEvent event) throws IOException 
     {
-        Playlists playlist = tablePlaylist.getSelectionModel().getSelectedItem();
+        Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
         tm.setPlaylist(playlist);
-        if (tablePlaylist.getSelectionModel().getSelectedItem() != null)
+        if (tblViewPlaylists.getSelectionModel().getSelectedItem() != null)
         {
-            int id = tablePlaylist.getSelectionModel().getSelectedItem().getPlaylistId();
+            int id = tblViewPlaylists.getSelectionModel().getSelectedItem().getPlaylistId();
             String path = "/mytunes/GUI/view/PlaylistWindow.fxml";
             boolean edit = true;
             openPlaylistWindow(path, id, edit);
@@ -272,14 +272,14 @@ public class MainWindowController implements Initializable
     @FXML
     private void clickDeletePlaylist(ActionEvent event) 
     {
-        if (tablePlaylist.getSelectionModel().getSelectedItem() != null)
+        if (tblViewPlaylists.getSelectionModel().getSelectedItem() != null)
         {
-            String name = tablePlaylist.getSelectionModel().getSelectedItem().getPlaylistName();
+            String name = tblViewPlaylists.getSelectionModel().getSelectedItem().getPlaylistName();
             Alert alert = new Alert(AlertType.CONFIRMATION, "DELETE " + name + " ?", ButtonType.YES, ButtonType.NO);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES)
             {
-                Playlists playlistToDelete = tablePlaylist.getSelectionModel().getSelectedItem();
+                Playlists playlistToDelete = tblViewPlaylists.getSelectionModel().getSelectedItem();
                 if (playlistToDelete.getSongAmountPL() > 0)
                 {
                     tm.deletePlaylistFromPlaylistSongs(playlistToDelete.getPlaylistId());
@@ -298,10 +298,10 @@ public class MainWindowController implements Initializable
             Runnable runnable = new progressUpdate();
             Thread thread = new Thread(runnable);
             thread.start();
-        } else if (song == listSongsOnPlaylist.getSelectionModel().getSelectedItem())
+        } else if (song == tblSongsOnPlaylist.getSelectionModel().getSelectedItem())
         {
             mediaPlayer.play();
-        } else if (song != listSongsOnPlaylist.getSelectionModel().getSelectedItem() && listSongsOnPlaylist.getSelectionModel().getSelectedItem() != null)
+        } else if (song != tblSongsOnPlaylist.getSelectionModel().getSelectedItem() && tblSongsOnPlaylist.getSelectionModel().getSelectedItem() != null)
         {
             setMusicPlayer();
         } else
@@ -311,12 +311,12 @@ public class MainWindowController implements Initializable
 
         mediaPlayer.setOnEndOfMedia(() ->
         {
-            if (listSongsOnPlaylist.getItems().size() == listSongsOnPlaylist.getSelectionModel().getSelectedIndex() + 1)
+            if (tblSongsOnPlaylist.getItems().size() == tblSongsOnPlaylist.getSelectionModel().getSelectedIndex() + 1)
             {
-                listSongsOnPlaylist.getSelectionModel().selectFirst();
+                tblSongsOnPlaylist.getSelectionModel().selectFirst();
             } else
             {
-                listSongsOnPlaylist.getSelectionModel().selectNext();
+                tblSongsOnPlaylist.getSelectionModel().selectNext();
             }
             setMusicPlayer();
             mediaPlayer.play();
@@ -329,7 +329,7 @@ public class MainWindowController implements Initializable
         {
             mediaPlayer.stop();
         }
-        song = listSongsOnPlaylist.getSelectionModel().getSelectedItem();
+        song = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
         songPath = song.getSongPath();
         hit = new Media(new File(songPath).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
@@ -353,7 +353,7 @@ public class MainWindowController implements Initializable
         if (!isPlaying)
         {
             isPlaying = true;
-            if (listSongsOnPlaylist.getSelectionModel().getSelectedItem() != null || song != null)
+            if (tblSongsOnPlaylist.getSelectionModel().getSelectedItem() != null || song != null)
             {
                 playSelectedSong();
                 mediaPlayer.setMute(muted);
@@ -408,7 +408,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void nextReleased(MouseEvent event) 
     {
-        listSongsOnPlaylist.getSelectionModel().selectNext();
+        tblSongsOnPlaylist.getSelectionModel().selectNext();
         try
         {
             playSelectedSong();
@@ -422,7 +422,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void previousReleased(MouseEvent event) //Plays previous song on the list
     {
-        listSongsOnPlaylist.getSelectionModel().selectPrevious();
+        tblSongsOnPlaylist.getSelectionModel().selectPrevious();
         try
         {
             playSelectedSong();
@@ -450,19 +450,19 @@ public class MainWindowController implements Initializable
     private void clickToggleUpSongPressed(MouseEvent event) 
     {
         
-        if (listSongsOnPlaylist.getSelectionModel().getSelectedIndex() > 0)
+        if (tblSongsOnPlaylist.getSelectionModel().getSelectedIndex() > 0)
         {
-            Playlists playlist = tablePlaylist.getSelectionModel().getSelectedItem();
-            int chosenItem = listSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
+            int chosenItem = tblSongsOnPlaylist.getSelectionModel().getSelectedIndex();
             int itemToSwapWith = chosenItem - 1;
-            Songs songActual = listSongsOnPlaylist.getSelectionModel().getSelectedItem();
-            Songs songToSwapWith = listSongsOnPlaylist.getItems().get(itemToSwapWith);
+            Songs songActual = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            Songs songToSwapWith = tblSongsOnPlaylist.getItems().get(itemToSwapWith);
             if (songActual.getsongId() != songToSwapWith.getsongId())
             {
                 tm.reCreatePlaylistSongs(songToSwapWith, songActual);
-                listSongsOnPlaylist.getItems().clear();
-                listSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
-                listSongsOnPlaylist.getSelectionModel().select(itemToSwapWith);
+                tblSongsOnPlaylist.getItems().clear();
+                tblSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
+                tblSongsOnPlaylist.getSelectionModel().select(itemToSwapWith);
             }
         }
        
@@ -472,20 +472,20 @@ public class MainWindowController implements Initializable
     @FXML
     private void clickToggleDownSongPressed(MouseEvent event)
     {
-        int sizeOfPlaylist = listSongsOnPlaylist.getItems().size();
-        if (listSongsOnPlaylist.getSelectionModel().getSelectedIndex() < sizeOfPlaylist - 1)
+        int sizeOfPlaylist = tblSongsOnPlaylist.getItems().size();
+        if (tblSongsOnPlaylist.getSelectionModel().getSelectedIndex() < sizeOfPlaylist - 1)
         {
-            Playlists playlist = tablePlaylist.getSelectionModel().getSelectedItem();
-            int chosenItem = listSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
+            int chosenItem = tblSongsOnPlaylist.getSelectionModel().getSelectedIndex();
             int itemToSwapWith = chosenItem + 1;
-            Songs songActual = listSongsOnPlaylist.getSelectionModel().getSelectedItem();
-            Songs songToSwapWith = listSongsOnPlaylist.getItems().get(itemToSwapWith);
+            Songs songActual = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            Songs songToSwapWith = tblSongsOnPlaylist.getItems().get(itemToSwapWith);
             if (songActual.getsongId() != songToSwapWith.getsongId())
             {
                 tm.reCreatePlaylistSongs(songActual, songToSwapWith);
-                listSongsOnPlaylist.getItems().clear();
-                listSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
-                listSongsOnPlaylist.getSelectionModel().select(itemToSwapWith);
+                tblSongsOnPlaylist.getItems().clear();
+                tblSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
+                tblSongsOnPlaylist.getSelectionModel().select(itemToSwapWith);
             }
         }
    }
@@ -494,29 +494,29 @@ public class MainWindowController implements Initializable
     @FXML
     private void clickPushSongPressed(MouseEvent event)
     {
-        if (tableSongs.getSelectionModel().getSelectedItem() != null && tablePlaylist.getSelectionModel().getSelectedItem() != null)
+        if (tblViewLibrary.getSelectionModel().getSelectedItem() != null && tblViewPlaylists.getSelectionModel().getSelectedItem() != null)
         {
-            Songs song = tableSongs.getSelectionModel().getSelectedItem();
-            Playlists playlist = tablePlaylist.getSelectionModel().getSelectedItem();
-            int index = tablePlaylist.getSelectionModel().getSelectedIndex();
+            Songs song = tblViewLibrary.getSelectionModel().getSelectedItem();
+            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
+            int index = tblViewPlaylists.getSelectionModel().getSelectedIndex();
             tm.addSongToPlaylist(song, playlist);
-            listSongsOnPlaylist.getItems().clear();
-            listSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
+            tblSongsOnPlaylist.getItems().clear();
+            tblSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
             refreshTablePlaylist();
-            tablePlaylist.refresh();
-            tablePlaylist.getSelectionModel().select(index);
+            tblViewPlaylists.refresh();
+            tblViewPlaylists.getSelectionModel().select(index);
         }
        }
 
     @FXML
     private void youClickedPlaylist(MouseEvent event) 
     {
-        if (tablePlaylist.getSelectionModel().getSelectedItem() != null)
+        if (tblViewPlaylists.getSelectionModel().getSelectedItem() != null)
         {
-            listSongsOnPlaylist.getItems().clear();
-            Playlists playlist = tablePlaylist.getSelectionModel().getSelectedItem();
+            tblSongsOnPlaylist.getItems().clear();
+            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
             List<Songs> list = tm.getPlaylistSongs(playlist);
-            listSongsOnPlaylist.getItems().addAll(list);
+            tblSongsOnPlaylist.getItems().addAll(list);
         }
     }
 
@@ -528,10 +528,10 @@ public class MainWindowController implements Initializable
         searchedSongsAsObservable.addAll(Search);
         if (Search.size() > 0 && text.length() > 0)
         {
-            tableSongs.setItems(searchedSongsAsObservable);
+            tblViewLibrary.setItems(searchedSongsAsObservable);
         } else if (Search.isEmpty() && text.length() > 0)
         {
-            tableSongs.getItems().clear();
+            tblViewLibrary.getItems().clear();
         } else if (Search.size() > 0 && text.length() == 0)
         {
             refreshTableSongs();
@@ -597,14 +597,14 @@ public class MainWindowController implements Initializable
 
     public void refreshTableSongs() 
     {
-        tableSongs.getItems().clear();
-        tableSongs.setItems(tm.getSongsAsObservable());
+        tblViewLibrary.getItems().clear();
+        tblViewLibrary.setItems(tm.getSongsAsObservable());
     }
 
     public void refreshTablePlaylist() 
     {
-        tablePlaylist.getItems().clear();
-        tablePlaylist.setItems(tm.getPlaylistsAsObservable());
+        tblViewPlaylists.getItems().clear();
+        tblViewPlaylists.setItems(tm.getPlaylistsAsObservable());
     }
     // This will open our EditSong fxml
     public void openSongWindow(String path, int playlistId, boolean isEditing)
