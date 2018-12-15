@@ -1,4 +1,4 @@
-package mytunes.GUI.Controller;
+package mytunes.GUI.controller;
 
 import java.awt.FileDialog;
 import java.io.File;
