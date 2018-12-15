@@ -34,6 +34,7 @@ import mytunes.BE.Playlists;
 import mytunes.BE.Songs;
 import mytunes.GUI.model.TuneModel;
 import mytunes.gui.Controller.PlaylistWindowController;
+import mytunes.gui.Controller.EditSongController;
 
 public class MainWindowController implements Initializable
 {

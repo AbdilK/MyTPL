@@ -64,7 +64,7 @@ public class PlaylistWindowController implements Initializable
         }
     }
 
-    void setController(MainWindowController controller, boolean isEditing, int playlistID) 
+    public void setController(MainWindowController controller, boolean isEditing, int playlistID) 
     {
         this.MainWController = controller;
         this.isEditing = isEditing;
