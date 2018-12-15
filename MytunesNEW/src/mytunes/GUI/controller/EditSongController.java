@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javax.swing.JFrame;
 import mytunes.BE.Songs;
 import mytunes.GUI.model.TuneModel;
+import mytunes.GUI.controller.MainWindowController;
 
 public class EditSongController implements Initializable {
 
