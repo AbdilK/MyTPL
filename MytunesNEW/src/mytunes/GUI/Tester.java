@@ -1,4 +1,4 @@
-package mytunes.GUI.view;
+package mytunes.GUI;
 
 
 import java.io.File;

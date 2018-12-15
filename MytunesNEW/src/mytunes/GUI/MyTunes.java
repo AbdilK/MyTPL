@@ -1,4 +1,4 @@
-package mytunes;
+package mytunes.GUI;
 
 import java.net.URL;
 import java.nio.file.Paths;
