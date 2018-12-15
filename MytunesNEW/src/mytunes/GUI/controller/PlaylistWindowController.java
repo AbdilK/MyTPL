@@ -1,4 +1,4 @@
-package mytunes.gui.Controller;
+package mytunes.GUI.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
