@@ -20,11 +20,7 @@ public class MyTunes extends Application
     {
         pStage.setTitle("DankTunes");
         pStage.centerOnScreen();
-        //URL url = Paths.get("mytunes/GUI/view/MainWindow.fxml").toUri().toURL();
         
-                //System.out.println(url.getFile());
-                
-        //Parent root = FXMLLoader.load(url);
         
         Parent root = FXMLLoader.load(getClass().getResource("/mytunes/GUI/view/MainWindow.fxml")); //getClassLoader added to avoid NullPointerException
 
