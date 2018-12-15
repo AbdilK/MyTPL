@@ -168,7 +168,7 @@ public class MainWindowController implements Initializable
     }
 
     @FXML
-    private void clickToDeleteSongFromPlaylist(ActionEvent event) 
+    private void clickRemoveSongPlaylist(ActionEvent event) 
     {
         if (listSongsOnPlaylist.getSelectionModel().getSelectedItem() != null)
         {
