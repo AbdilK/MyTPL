@@ -19,7 +19,7 @@
           <TableColumn fx:id="columnPlaylistName" prefWidth="227.0" />
         </columns>
       </TableView>
-      <Button fx:id="PushSongLeft" layoutX="472.0" layoutY="286.0" mnemonicParsing="false"  onMousePressed="#clickPushSongPressed"  prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: green;" text="&lt;" textAlignment="CENTER">
+      <Button layoutX="472.0" layoutY="286.0" mnemonicParsing="false"  onMousePressed="#clickPushSongPressed"  prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: green;" text="&lt;" textAlignment="CENTER">
          <font>
             <Font size="25.0" />
          </font></Button>

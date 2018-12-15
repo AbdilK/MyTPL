@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javax.swing.JFrame;
@@ -27,12 +28,19 @@ public class NewSongController implements Initializable {
     private TextField DurationBox;
     @FXML
     private TextField FilePathBox;
+    @FXML
     private ComboBox<String> comboGenre;
     private MainWindowController MainWController;
     private boolean isEditing = false;
     private int SongNewID;
     private List<String> AllGenres;
     private Songs song;
+    @FXML
+    private Button btn_Choose;
+    @FXML
+    private Button btn_Save;
+    @FXML
+    private Button btn_Cancel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,8 +60,7 @@ public class NewSongController implements Initializable {
         }
     }
 
-    @FXML
-    private void clickToPickFile(ActionEvent event) throws IOException 
+    private void clickChooseSong(ActionEvent event) throws IOException 
     {
         FileDialog fileD = new FileDialog(new JFrame());
         fileD.setVisible(true);
@@ -64,15 +71,13 @@ public class NewSongController implements Initializable {
         }
     }
 
-    @FXML
-    private void clickToCancel(ActionEvent event) // Closes the SongEditor window
+    private void clickCancelNewSong(ActionEvent event) // Closes the SongEditor window
     {
         isEditing = false;
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
-    @FXML
-    private void clickToSave(ActionEvent event) throws IOException // Saving data from SongEditor window
+    private void clickSaveSong(ActionEvent event) throws IOException // Saving data from SongEditor window
     {
         if (!isEditing) {
             if (!"".equals(DurationBox.getText()) && !"".equals(ArtistBox.getText()) && comboGenre.getSelectionModel().getSelectedItem() != null
