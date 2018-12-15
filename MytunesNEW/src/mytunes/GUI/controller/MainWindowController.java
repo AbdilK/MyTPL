@@ -41,7 +41,7 @@ public class MainWindowController implements Initializable
     @FXML
     private ListView<Songs> listSongsOnPlaylist;
     @FXML
-    private TextField txtSearch;
+    private TextField textFieldFilterSearch;
     @FXML
     private Label lblSongTitle;
     @FXML
@@ -522,7 +522,7 @@ public class MainWindowController implements Initializable
 
     private void search()
     {
-        String text = txtSearch.getText();
+        String text = textFieldFilterSearch.getText();
         List<Songs> Search = tm.searchSong(text);
         searchedSongsAsObservable.clear();
         searchedSongsAsObservable.addAll(Search);
@@ -541,7 +541,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void enterSearch(KeyEvent event) 
     {
-        if (event.getCode() == KeyCode.ENTER && txtSearch.isFocused())
+        if (event.getCode() == KeyCode.ENTER && textFieldFilterSearch.isFocused())
         {
             search();
         }
