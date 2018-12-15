@@ -22,9 +22,9 @@
             <TextField fx:id="ArtistBox" layoutX="84.0" layoutY="114.0" />
             <TextField fx:id="DurationBox" layoutX="84.0" layoutY="215.0" />
             <TextField fx:id="FilePathBox" layoutX="84.0" layoutY="268.0" prefHeight="25.0" prefWidth="257.0" />
-            <Button fx:id="btn_Choose" layoutX="366.0" layoutY="268.0" mnemonicParsing="false" onAction="#clickChoose" style="-fx-background-color: green;" text="Choose" />
-            <Button fx:id="btn_Save" layoutX="371.0" layoutY="353.0" mnemonicParsing="false" onAction="#clickSaveSong" style="-fx-background-color: green;" text="Save" />
-            <Button fx:id="btn_Cancel" layoutX="300.0" layoutY="353.0" mnemonicParsing="false" onAction="#clickCloseSongWindow" style="-fx-background-color: green;" text="Cancel" />
+            <Button fx:id="btn_Choose" layoutX="366.0" layoutY="268.0" mnemonicParsing="false"  style="-fx-background-color: green;" text="Choose" />
+            <Button fx:id="btn_Save" layoutX="371.0" layoutY="353.0" mnemonicParsing="false"  style="-fx-background-color: green;" text="Save" />
+            <Button fx:id="btn_Cancel" layoutX="300.0" layoutY="353.0" mnemonicParsing="false"  style="-fx-background-color: green;" text="Cancel" />
             <Line endX="206.00006103515625" layoutX="251.0" layoutY="60.0" startX="-252.0" />
             <Label layoutX="71.0" layoutY="14.0" prefHeight="32.0" prefWidth="294.0" text="Add a new to public library">
                <font>

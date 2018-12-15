@@ -14,16 +14,16 @@
 
    <children>
       <Slider fx:id="volumeSlider" layoutX="486.0" layoutY="68.0" orientation="VERTICAL" prefHeight="67.0" prefWidth="27.0" />
-      <TableView fx:id="tblViewPlaylists" layoutX="14.0" layoutY="108.0" minHeight="400.0" minWidth="200.0" onMouseClicked="#setPlaylist" prefHeight="410.0" prefWidth="220.0" style="-fx-background-color: green;">
+      <TableView fx:id="tblViewPlaylists" layoutX="14.0" layoutY="108.0" minHeight="400.0" minWidth="200.0"  prefHeight="410.0" prefWidth="220.0" style="-fx-background-color: green;">
         <columns>
           <TableColumn fx:id="columnPlaylistName" prefWidth="227.0" />
         </columns>
       </TableView>
-      <Button fx:id="PushSongLeft" layoutX="472.0" layoutY="286.0" mnemonicParsing="false" onAction="#clickPushSongLeft" onMousePressed="#clickPushSongPressed" onMouseReleased="#clickPushSongRelease" prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: green;" text="&lt;" textAlignment="CENTER">
+      <Button fx:id="PushSongLeft" layoutX="472.0" layoutY="286.0" mnemonicParsing="false"  onMousePressed="#clickPushSongPressed"  prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: green;" text="&lt;" textAlignment="CENTER">
          <font>
             <Font size="25.0" />
          </font></Button>
-      <TableView fx:id="tblViewLibrary" layoutX="542.0" layoutY="108.0" minHeight="400.0" onMouseClicked="#setSong" prefHeight="410.0" prefWidth="434.0" style="-fx-background-color: green;">
+      <TableView fx:id="tblViewLibrary" layoutX="542.0" layoutY="108.0" minHeight="400.0"  prefHeight="410.0" prefWidth="434.0" style="-fx-background-color: green;">
         <columns>
           <TableColumn fx:id="tblViewLibraryColumnTitle" prefWidth="115.0" text="Title" />
           <TableColumn fx:id="tblViewLibraryColumnArtist" prefWidth="135.0" text="Artist" />
@@ -43,10 +43,10 @@
       <Label layoutX="256.0" layoutY="84.0" text="Songs on Playlist" />
       <Label layoutX="542.0" layoutY="84.0" style="-fx-skin: grey;" text="All songs" />
       <Label fx:id="labelCurrentlyPlaying" layoutX="353.0" layoutY="34.0" />
-      <Label layoutX="773.0" layoutY="46.0" style="-fx-background-color: ;" text="Filter" />
-      <TextField fx:id="textFieldFilterSearch" layoutX="813.0" layoutY="41.0" onKeyReleased="#search" />
+      <Label layoutX="773.0" layoutY="76.0" style="-fx-background-color: ;" text="Filter" />
+      <TextField fx:id="textFieldFilterSearch" layoutX="813.0" layoutY="71.0" onKeyReleased="#search" />
 
-    <Button fx:id="btnPlay" defaultButton="true" layoutX="475.0" layoutY="7.0" minWidth="38.0" mnemonicParsing="false" onAction="#clickPlayButton" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-font-size: 30; -fx-background-color: green;" text="▷">
+    <Button fx:id="btnPlay" defaultButton="true" layoutX="475.0" layoutY="7.0" minWidth="38.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-font-size: 30; -fx-background-color: green;" text="▷">
 
          <opaqueInsets>
             <Insets />
@@ -58,30 +58,30 @@
          </padding>
       </Button>
 
-      <Button fx:id="btnReplay" layoutX="435.0" layoutY="31.0" mnemonicParsing="false" onAction="#clickReplayButton" prefHeight="41.0" prefWidth="41.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="↺">
+      <Button fx:id="btnReplay" layoutX="435.0" layoutY="31.0" mnemonicParsing="false"  prefHeight="41.0" prefWidth="41.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="↺">
 
          <padding>
             <Insets bottom="2.0" />
          </padding></Button>
-      <Button fx:id="btnStop" layoutX="522.0" layoutY="31.0" mnemonicParsing="false" onAction="#clickStopButton" prefHeight="41.0" prefWidth="41.0" style="-fx-background-radius: 100; -fx-font-size: 20; -fx-background-color: green;" text="▢">
+      <Button fx:id="btnStop" layoutX="522.0" layoutY="31.0" mnemonicParsing="false"  prefHeight="41.0" prefWidth="41.0" style="-fx-background-radius: 100; -fx-font-size: 20; -fx-background-color: green;" text="▢">
          <padding>
             <Insets left="2.0" />
          </padding>
       </Button>
-      <Button fx:id="ToggleUpSongPL" layoutX="256.0" layoutY="523.0" mnemonicParsing="false" onAction="#clickToggleUpSongPL" onMousePressed="#clickToggleUpSongPressed" onMouseReleased="#clickToggleUpSongRelease" prefHeight="0.0" prefWidth="31.0" style="-fx-background-color: green;" text="⇧">
+      <Button fx:id="ToggleUpSongPL" layoutX="256.0" layoutY="523.0" mnemonicParsing="false"  onMousePressed="#clickToggleUpSongPressed" prefHeight="0.0" prefWidth="31.0" style="-fx-background-color: green;" text="⇧">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="ToggleDownSongPL" layoutX="295.0" layoutY="524.0" mnemonicParsing="false" onAction="#clickToggleDownSongPL" onMousePressed="#clickToggleDownSongPressed" onMouseReleased="#clickToggleDownSongRelease" prefHeight="17.0" prefWidth="31.0" style="-fx-background-color: green;" text="⇩">
+      <Button fx:id="ToggleDownSongPL" layoutX="295.0" layoutY="524.0" mnemonicParsing="false"  onMousePressed="#clickToggleDownSongPressed"  prefHeight="17.0" prefWidth="31.0" style="-fx-background-color: green;" text="⇩">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="btnPreviousSong" layoutX="405.0" layoutY="56.0" mnemonicParsing="false" onAction="#clickPreviousSong" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="&lt;-">
+      <Button fx:id="btnPreviousSong" layoutX="405.0" layoutY="56.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="&lt;-">
          <padding>
             <Insets bottom="5.0" right="2.0" />
          </padding>
       </Button>
-      <Button fx:id="btnNext" layoutX="562.0" layoutY="56.0" mnemonicParsing="false" onAction="#clickNextSong" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="-&gt;">
+      <Button fx:id="btnNext" layoutX="562.0" layoutY="56.0" mnemonicParsing="false"  prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="-&gt;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -89,7 +89,7 @@
             <Insets bottom="5.0" right="2.0" />
          </padding>
       </Button>
-      <TableView fx:id="tblSongsOnPlaylist" layoutX="256.0" layoutY="108.0" onMouseClicked="#selectSongInPlaylist" prefHeight="410.0" prefWidth="206.0" style="-fx-background-color: green;">
+      <TableView fx:id="tblSongsOnPlaylist" layoutX="256.0" layoutY="108.0"  prefHeight="410.0" prefWidth="206.0" style="-fx-background-color: green;">
         <columns>
           <TableColumn fx:id="columnSongsInPlaylist" prefWidth="199.0" />
         </columns>
