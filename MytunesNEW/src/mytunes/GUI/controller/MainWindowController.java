@@ -33,8 +33,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import mytunes.BE.Playlists;
 import mytunes.BE.Songs;
 import mytunes.GUI.model.TuneModel;
-import mytunes.GUI.Controller.PlaylistWindowController;
-import mytunes.GUI.Controller.EditSongController;
+import mytunes.GUI.controller.PlaylistWindowController;
+import mytunes.GUI.controller.EditSongController;
 
 public class MainWindowController implements Initializable
 {
