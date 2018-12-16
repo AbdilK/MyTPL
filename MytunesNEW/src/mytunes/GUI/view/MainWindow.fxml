@@ -90,13 +90,13 @@
           <TableColumn fx:id="columnSongsInPlaylist" prefWidth="199.0" />
         </columns>
       </TableView>
-      <Label fx:id="currentTimeLabel" layoutX="136.0" layoutY="55.0" text="Label">
+      <Label fx:id="currentTimeLabel" layoutX="136.0" layoutY="55.0">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label fx:id="lblSongTitle" layoutX="24.0" layoutY="17.0" text="Label">
+      <Label fx:id="lblSongTitle" layoutX="24.0" layoutY="17.0" text="Current Song">
          <font>
-            <Font size="23.0" />
+            <Font size="19.0" />
          </font></Label>
    </children>
 </AnchorPane>
