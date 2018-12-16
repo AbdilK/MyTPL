@@ -40,7 +40,7 @@
       <Label layoutX="542.0" layoutY="84.0" style="-fx-skin: grey;" text="All songs" />
       <Label fx:id="labelCurrentlyPlaying" layoutX="353.0" layoutY="34.0" />
       <Label layoutX="773.0" layoutY="76.0" style="-fx-background-color: ;" text="Filter" />
-      <TextField fx:id="textFieldFilterSearch" layoutX="813.0" layoutY="71.0" />
+      <TextField fx:id="textFieldFilterSearch" layoutX="813.0" layoutY="71.0" onKeyPressed="#HitEnterSearch" />
 
     <Button fx:id="btnPlay" defaultButton="true" layoutX="475.0" layoutY="7.0" minWidth="38.0" mnemonicParsing="false" onAction="#playSelectedSong" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-font-size: 30; -fx-background-color: green;" text="▷">
 
@@ -87,7 +87,7 @@
       </Button>
       <TableView fx:id="tblSongsOnPlaylist" layoutX="256.0" layoutY="108.0" prefHeight="410.0" prefWidth="206.0" style="-fx-background-color: green;">
         <columns>
-          <TableColumn fx:id="columnSongsInPlaylist" prefWidth="199.0" />
+          <TableColumn fx:id="columnSongsInPlaylist" prefWidth="96.0" text="Test" />
         </columns>
       </TableView>
       <Label fx:id="currentTimeLabel" layoutX="136.0" layoutY="55.0">

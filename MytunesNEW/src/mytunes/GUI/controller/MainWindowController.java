@@ -541,13 +541,7 @@ public class MainWindowController implements Initializable
         }
     }
 
-    private void enterSearch(KeyEvent event) 
-    {
-        if (event.getCode() == KeyCode.ENTER && textFieldFilterSearch.isFocused())
-        {
-            search();
-        }
-    }
+    
 
    
 
@@ -583,6 +577,15 @@ public class MainWindowController implements Initializable
             refreshTablePlaylist();
             tblViewPlaylists.refresh();
             tblViewPlaylists.getSelectionModel().select(index);
+        }
+    }
+
+    @FXML
+    private void HitEnterSearch(KeyEvent event)
+    {
+         if (event.getCode() == KeyCode.ENTER && textFieldFilterSearch.isFocused())
+        {
+            search();
         }
     }
 
