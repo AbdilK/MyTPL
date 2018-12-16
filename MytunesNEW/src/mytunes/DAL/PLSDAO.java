@@ -67,11 +67,10 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "INSERT INTO PlaylistSongs  VALUES (?,?, ?)";
+            String sql = "INSERT INTO PlaylistSongs (SongID, PlaylistID) VALUES (?,?)";
             PreparedStatement ppst = con.prepareCall(sql);
-            ppst.setInt(3, playlist.getPlaylistId());
             ppst.setInt(1, song.getsongId());
-            ppst.setInt(2, song.getsongId());
+            ppst.setInt(2, playlist.getPlaylistId());
             ppst.execute();
         } catch (SQLServerException ex)
         {
@@ -84,7 +83,7 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM playlistSongs WHERE id=?";
+            String sql = "DELETE FROM PlaylistSongs WHERE ID=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
             ppst.execute();
@@ -99,7 +98,7 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM playlistSongs WHERE playlistID=?";
+            String sql = "DELETE FROM PlaylistSongs WHERE PlaylistID=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
             ppst.execute();
@@ -109,21 +108,21 @@ public class PLSDAO
         }
     }
 
-    public void reCreatePlaylistSongs(Songs selected, Songs Replace) throws SQLException // This method switches positions of two songs in the playlist
+    public void reCreatePlaylistSongs(Songs selected, Songs replace) throws SQLException // This method switches positions of two songs in the playlist
     {
         try
         {
             Connection con = db.getConnection();
             int selectedID = selected.getsongId();   
-            int ReplaceID = Replace.getsongId();   
-            String sql = "UPDATE PlaylistSongs SET SongID = ? WHERE id = ?";    
-            String sql2 = "UPDATE PlaylistSongs SET SongID = ? WHERE id = ?";
+            int replaceID = replace.getsongId();   
+            String sql = "UPDATE PlaylistSongs SET SongID = ? WHERE ID = ?";    
+            String sqll = "UPDATE PlaylistSongs SET SongID = ? WHERE ID = ?";
             PreparedStatement ppst = con.prepareCall(sql);
-            ppst.setInt(1, ReplaceID);                       
+            ppst.setInt(1, replaceID);                       
             ppst.setInt(2, selected.getPlaylistUniqueID());     
-            PreparedStatement ppst2 = con.prepareCall(sql2);    
+            PreparedStatement ppst2 = con.prepareCall(sqll);    
             ppst2.setInt(1, selectedID);
-            ppst2.setInt(2, Replace.getPlaylistUniqueID());
+            ppst2.setInt(2, replace.getPlaylistUniqueID());
             ppst.execute();
             ppst2.execute();
         } catch (SQLServerException ex)
