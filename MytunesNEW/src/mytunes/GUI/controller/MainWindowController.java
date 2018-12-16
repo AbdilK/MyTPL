@@ -167,8 +167,8 @@ public class MainWindowController implements Initializable
         tblViewLibrary.getColumns().addAll(tblViewLibraryColumnTitle, tblViewLibraryColumnArtist, tblViewLibraryColumnGenre, tblViewLibraryColumnDuration);
         ViewSongsOnPlaylist.getColumns().add(tblViewLibraryColumnTitle);
         * 
-       */ songsAsObservable = FXCollections.observableArrayList(tm.getSongsAsObservable());
-       
+       */ 
+        songsAsObservable = FXCollections.observableArrayList(tm.getSongsAsObservable());
         tblViewLibraryColumnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         tblViewLibraryColumnArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
         tblViewLibraryColumnGenre.setCellValueFactory(new PropertyValueFactory<>("genre"));
@@ -225,8 +225,8 @@ public class MainWindowController implements Initializable
         {
             int id = tblViewLibrary.getSelectionModel().getSelectedItem().getsongId();
             String path = "/mytunes/GUI/view/Editsong.fxml";
-            boolean IsEditing = true;
-            openSongWindow(path, id, IsEditing);
+            boolean edit = true;
+            openSongWindow(path, id, edit);
         }
     }
 
@@ -423,66 +423,8 @@ public class MainWindowController implements Initializable
     private void getSliderValue(DragEvent event)
     {
         lblSongTitle.setText(Double.toString(volumeSlider.getValue()));
-    }
    
-     @FXML
-    private void clickToggleUpSongPressed(MouseEvent event) 
-    {
-        
-        if (ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex() > 0)
-        {
-            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
-            int chosenItem = ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex();
-            int itemToSwapWith = chosenItem - 1;
-            Songs songActual = ViewSongsOnPlaylist.getSelectionModel().getSelectedItem();
-            Songs songToSwapWith = ViewSongsOnPlaylist.getItems().get(itemToSwapWith);
-            if (songActual.getsongId() != songToSwapWith.getsongId())
-            {
-                tm.reCreatePlaylistSongs(songToSwapWith, songActual);
-                ViewSongsOnPlaylist.getItems().clear();
-                ViewSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
-                ViewSongsOnPlaylist.getSelectionModel().select(itemToSwapWith);
-            }
-        }
-       
     }
-
-   
-    @FXML
-    private void clickToggleDownSongPressed(MouseEvent event)
-    {
-        int sizeOfPlaylist = ViewSongsOnPlaylist.getItems().size();
-        if (ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex() < sizeOfPlaylist - 1)
-        {
-            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
-            int chosenItem = ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex();
-            int itemToSwapWith = chosenItem + 1;
-            Songs songActual = ViewSongsOnPlaylist.getSelectionModel().getSelectedItem();
-            Songs songToSwapWith = ViewSongsOnPlaylist.getItems().get(itemToSwapWith);
-            if (songActual.getsongId() != songToSwapWith.getsongId())
-            {
-                tm.reCreatePlaylistSongs(songActual, songToSwapWith);
-                ViewSongsOnPlaylist.getItems().clear();
-                ViewSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
-                ViewSongsOnPlaylist.getSelectionModel().select(itemToSwapWith);
-            }
-        }
-   }
-
-
-
-
-    private void youClickedPlaylist(MouseEvent event) 
-    {
-        if (tblViewPlaylists.getSelectionModel().getSelectedItem() != null)
-        {
-            ViewSongsOnPlaylist.getItems().clear();
-            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
-            List<Songs> list = tm.getPlaylistSongs(playlist);
-            ViewSongsOnPlaylist.getItems().addAll(list);
-        }
-    }
-
     private void search()
     {
         String text = textFieldFilterSearch.getText();
@@ -501,11 +443,6 @@ public class MainWindowController implements Initializable
         }
     }
 
-    
-
-   
-
-    @FXML
     private void getSongsFromPlaylist(MouseEvent event)
     {
         Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
@@ -513,10 +450,6 @@ public class MainWindowController implements Initializable
         ViewSongsOnPlaylist.setItems(obsList);
     }
 
-    @FXML
-    private void selectSong(MouseEvent event)
-    {
-    }
 
     @FXML
     private void clickPushSongToPlaylist(ActionEvent event)
@@ -549,15 +482,7 @@ public class MainWindowController implements Initializable
         }
     }
 
-    private void clickNewSongButton(ActionEvent event)
-    {
-        Songs NewSong = null;
-        tm.setSong(NewSong);
-        String path = "/mytunes/GUI/view/NewSong.fxml";
-        int id = 0;
-        boolean isEditing = false;
-        openSongWindow(path, id, isEditing);
-    }
+    
 
     @FXML
     private void clickNewSong(ActionEvent event)
@@ -630,6 +555,60 @@ public class MainWindowController implements Initializable
         
     }
 
+
+    @FXML
+    private void clickToggleUp(MouseEvent event)
+    {
+         if (ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex() > 0)
+        {
+            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
+            int chosenItem = ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+            int itemToSwapWith = chosenItem - 1;
+            Songs songActual = ViewSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            Songs songToSwapWith = ViewSongsOnPlaylist.getItems().get(itemToSwapWith);
+            if (songActual.getsongId() != songToSwapWith.getsongId())
+            {
+                tm.reCreatePlaylistSongs(songToSwapWith, songActual);
+                ViewSongsOnPlaylist.getItems().clear();
+                ViewSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
+                ViewSongsOnPlaylist.getSelectionModel().select(itemToSwapWith);
+            }
+        }
+    }
+
+    @FXML
+    private void clickToggleDown(MouseEvent event)
+    {
+        int sizeOfPlaylist = ViewSongsOnPlaylist.getItems().size();
+        if (ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex() < sizeOfPlaylist - 1)
+        {
+            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
+            int chosenItem = ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+            int itemToSwapWith = chosenItem + 1;
+            Songs songActual = ViewSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            Songs songToSwapWith = ViewSongsOnPlaylist.getItems().get(itemToSwapWith);
+            if (songActual.getsongId() != songToSwapWith.getsongId())
+            {
+                tm.reCreatePlaylistSongs(songActual, songToSwapWith);
+                ViewSongsOnPlaylist.getItems().clear();
+                ViewSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
+                ViewSongsOnPlaylist.getSelectionModel().select(itemToSwapWith);
+            }
+        }
+    }
+
+    @FXML
+    private void clickPlaylist(MouseEvent event)
+    {
+         if (tblViewPlaylists.getSelectionModel().getSelectedItem() != null)
+        {
+            ViewSongsOnPlaylist.getItems().clear();
+            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
+            List<Songs> list = tm.getPlaylistSongs(playlist);
+            ViewSongsOnPlaylist.getItems().addAll(list);
+        }
+    }
+
     private class progressUpdate implements Runnable
     {
 
@@ -644,7 +623,7 @@ public class MainWindowController implements Initializable
                     double d = currentTime.toSeconds();
                     int i = (int) d;
                     currentTimeLabel.setText(currentTimeCalculator(i));
-                    updateProgressBar(currentTime.toSeconds());
+                    updateSongDurationCounter(currentTime.toSeconds());
                 });
                 try
                 {
@@ -657,7 +636,7 @@ public class MainWindowController implements Initializable
         }
     }
 
-    private void updateProgressBar(final double currentTime)
+    private void updateSongDurationCounter(final double currentTime)
     {
         double fractionalProgress = (double) currentTime / (double) songLenght;
         songProgress = new ProgressBar();

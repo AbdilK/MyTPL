@@ -15,12 +15,12 @@
 
    <children>
       <Slider fx:id="volumeSlider" layoutX="486.0" layoutY="68.0" orientation="VERTICAL" prefHeight="67.0" prefWidth="27.0" />
-      <TableView fx:id="tblViewPlaylists" layoutX="14.0" layoutY="108.0" minHeight="400.0" minWidth="200.0" onMouseClicked="#getSongsFromPlaylist" prefHeight="410.0" prefWidth="220.0" style="-fx-background-color: green;" />
+      <TableView fx:id="tblViewPlaylists" layoutX="14.0" layoutY="108.0" minHeight="400.0" minWidth="200.0" onMouseClicked="#clickPlaylist" prefHeight="410.0" prefWidth="220.0" style="-fx-background-color: green;" />
       <Button layoutX="472.0" layoutY="286.0" mnemonicParsing="false" onAction="#clickPushSongToPlaylist" prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: green;" text="&lt;" textAlignment="CENTER">
          <font>
             <Font size="25.0" />
          </font></Button>
-      <TableView fx:id="tblViewLibrary" layoutX="542.0" layoutY="108.0" minHeight="400.0" onMouseClicked="#selectSong" prefHeight="410.0" prefWidth="434.0" style="-fx-background-color: green;">
+      <TableView fx:id="tblViewLibrary" layoutX="542.0" layoutY="108.0" minHeight="400.0" prefHeight="410.0" prefWidth="434.0" style="-fx-background-color: green;">
         <columns>
           <TableColumn fx:id="tblViewLibraryColumnTitle" prefWidth="115.0" text="Title" />
           <TableColumn fx:id="tblViewLibraryColumnArtist" prefWidth="135.0" text="Artist" />
@@ -65,11 +65,11 @@
             <Insets left="2.0" />
          </padding>
       </Button>
-      <Button fx:id="ToggleUpSongPL" layoutX="256.0" layoutY="523.0" mnemonicParsing="false" onMousePressed="#clickToggleUpSongPressed" prefHeight="0.0" prefWidth="31.0" style="-fx-background-color: green;" text="⇧">
+      <Button fx:id="ToggleUpSongPL" layoutX="256.0" layoutY="523.0" mnemonicParsing="false" onMouseReleased="#clickToggleUp" prefHeight="0.0" prefWidth="31.0" style="-fx-background-color: green;" text="⇧">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="ToggleDownSongPL" layoutX="295.0" layoutY="524.0" mnemonicParsing="false" onMousePressed="#clickToggleDownSongPressed" prefHeight="17.0" prefWidth="31.0" style="-fx-background-color: green;" text="⇩">
+      <Button fx:id="ToggleDownSongPL" layoutX="295.0" layoutY="524.0" mnemonicParsing="false" onMouseReleased="#clickToggleDown" prefHeight="17.0" prefWidth="31.0" style="-fx-background-color: green;" text="⇩">
          <font>
             <Font size="15.0" />
          </font></Button>

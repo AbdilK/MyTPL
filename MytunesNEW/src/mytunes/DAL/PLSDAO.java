@@ -108,21 +108,21 @@ public class PLSDAO
         }
     }
 
-    public void reCreatePlaylistSongs(Songs selected, Songs Replace) throws SQLException // This method switches positions of two songs in the playlist
+    public void reCreatePlaylistSongs(Songs selected, Songs replace) throws SQLException // This method switches positions of two songs in the playlist
     {
         try
         {
             Connection con = db.getConnection();
             int selectedID = selected.getsongId();   
-            int ReplaceID = Replace.getsongId();   
+            int replaceID = replace.getsongId();   
             String sql = "UPDATE PlaylistSongs SET SongID = ? WHERE ID = ?";    
-            String sql2 = "UPDATE PlaylistSongs SET SongID = ? WHERE ID = ?";
+            String sqll = "UPDATE PlaylistSongs SET SongID = ? WHERE ID = ?";
             PreparedStatement ppst = con.prepareCall(sql);
-            ppst.setInt(1, ReplaceID);                       
+            ppst.setInt(1, replaceID);                       
             ppst.setInt(2, selected.getPlaylistUniqueID());     
-            PreparedStatement ppst2 = con.prepareCall(sql2);    
+            PreparedStatement ppst2 = con.prepareCall(sqll);    
             ppst2.setInt(1, selectedID);
-            ppst2.setInt(2, Replace.getPlaylistUniqueID());
+            ppst2.setInt(2, replace.getPlaylistUniqueID());
             ppst.execute();
             ppst2.execute();
         } catch (SQLServerException ex)

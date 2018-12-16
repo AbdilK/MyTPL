@@ -31,15 +31,15 @@ public class PLDAO
         DankPlaylist = new PLSDAO();
     }
 
-    public void createPlaylist(Playlists p) throws SQLException
+    public void createPlaylist(Playlists playlist) throws SQLException
     {
         try
         {
             Connection con = db.getConnection();
             String sql = "INSERT INTO Playlists VALUES (?,?)";
             PreparedStatement ppst = con.prepareCall(sql);
-            ppst.setInt(1, p.getPlaylistId());
-            ppst.setString(2, p.getPlaylistName());
+            ppst.setInt(1, playlist.getPlaylistId());
+            ppst.setString(2, playlist.getPlaylistName());
             ppst.executeUpdate();
         } catch (SQLServerException ex)
         {
@@ -85,7 +85,7 @@ public class PLDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "UPDATE Playlists SET name=? WHERE id=?";
+            String sql = "UPDATE Playlists SET PlaylistName=? WHERE PlaylistID=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setString(1, p.getPlaylistName());
             ppst.setInt(2, p.getPlaylistId());
@@ -116,35 +116,5 @@ public class PLDAO
         }
         return null;
     }
-    /**public String calculatePlaylistDuration(Playlists p) throws SQLException  { 
-        int h = 0;
-        int min = 0;
-        int sec = 0;
-        String first;
-        String second;
-        String third;
-        String songTime;
-        int wholeSecs = 0;
-        
-        for (Songs song : PLSDAO.getPlaylistSongs(p)) {
-            songTime = song.getDuration();
-
-            wholeSecs += 60*Integer.parseInt(songTime.substring(0, songTime.indexOf(":")));
-            wholeSecs += Integer.parseInt(songTime.substring(songTime.indexOf(":") + 1, songTime.length()));
-
-        }
-        h = wholeSecs/3600;
-        wholeSecs -= h*3600;
-        min = wholeSecs/60;
-        wholeSecs -= min*60;
-        sec = wholeSecs;
-        if(h<10)first="0"+h;
-        else first = ""+h;
-        if(min<10)second="0"+min;
-        else second = ""+min;      
-        if(sec<10)third="0"+sec;
-        else third = ""+sec;
-        return first + ":" + second + ":" + third;
-    }**/
     
 }
