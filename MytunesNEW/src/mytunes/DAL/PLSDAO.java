@@ -83,7 +83,7 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM PlaylistSongs WHERE id=?";
+            String sql = "DELETE FROM PlaylistSongs WHERE ID=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
             ppst.execute();
@@ -98,7 +98,7 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM playlistSongs WHERE playlistID=?";
+            String sql = "DELETE FROM PlaylistSongs WHERE PlaylistID=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
             ppst.execute();
@@ -115,8 +115,8 @@ public class PLSDAO
             Connection con = db.getConnection();
             int selectedID = selected.getsongId();   
             int ReplaceID = Replace.getsongId();   
-            String sql = "UPDATE PlaylistSongs SET SongID = ? WHERE id = ?";    
-            String sql2 = "UPDATE PlaylistSongs SET SongID = ? WHERE id = ?";
+            String sql = "UPDATE PlaylistSongs SET SongID = ? WHERE ID = ?";    
+            String sql2 = "UPDATE PlaylistSongs SET SongID = ? WHERE ID = ?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, ReplaceID);                       
             ppst.setInt(2, selected.getPlaylistUniqueID());     
