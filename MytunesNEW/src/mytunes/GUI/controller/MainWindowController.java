@@ -171,7 +171,7 @@ public class MainWindowController implements Initializable
        
         tblViewLibraryColumnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         tblViewLibraryColumnArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
-        tblViewLibraryColumnGenre.setCellValueFactory(new PropertyValueFactory<>("gennre"));
+        tblViewLibraryColumnGenre.setCellValueFactory(new PropertyValueFactory<>("genre"));
         tblViewLibraryColumnDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         tblViewLibrary.getColumns().clear();
         tblViewLibrary.setItems(songsAsObservable);
@@ -239,7 +239,7 @@ public class MainWindowController implements Initializable
         if (ToDeleteSong != null)
         {
             String name = ToDeleteSong.getTitle() + " " + ToDeleteSong.getArtist();
-            Alert alert = new Alert(AlertType.CONFIRMATION, "Click YES to confirm deletion of the chosen song " + name + " Click OK to delete song from Database only and YES to delete from PC and Database", ButtonType.YES, ButtonType.OK, ButtonType.NO);
+            Alert alert = new Alert(AlertType.CONFIRMATION, "Click YES to confirm deletion of the chosen song " + name + " Click OK to delete song from Database only and DELETEALL to delete from PC and Database", ButtonType.YES, ButtonType.OK, ButtonType.NO);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.OK)
             {

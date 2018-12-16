@@ -67,11 +67,10 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "INSERT INTO PlaylistSongs  VALUES (?,?, ?)";
+            String sql = "INSERT INTO PlaylistSongs (SongID, PlaylistID) VALUES (?,?)";
             PreparedStatement ppst = con.prepareCall(sql);
-            ppst.setInt(3, playlist.getPlaylistId());
             ppst.setInt(1, song.getsongId());
-            ppst.setInt(2, song.getsongId());
+            ppst.setInt(2, playlist.getPlaylistId());
             ppst.execute();
         } catch (SQLServerException ex)
         {
@@ -84,7 +83,7 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM playlistSongs WHERE id=?";
+            String sql = "DELETE FROM PlaylistSongs WHERE id=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
             ppst.execute();

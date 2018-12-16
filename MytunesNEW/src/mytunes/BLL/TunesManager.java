@@ -60,7 +60,7 @@ public class TunesManager implements BLLLogicFacade
         List<Playlists> playlists;
         try
         {
-            System.out.println("test");
+            System.out.println("All playlists has been loaded ");
             return playlists = PlaylistDAO.getAllPlaylists();
         } catch (SQLException ex)
         {
