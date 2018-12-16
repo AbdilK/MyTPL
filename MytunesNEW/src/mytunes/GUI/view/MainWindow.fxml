@@ -33,7 +33,7 @@
       <Button fx:id="btnDeletePlaylists" layoutX="164.0" layoutY="526.0" mnemonicParsing="false" onAction="#clickDeletePlaylist" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: green;" text="Delete" />
       <Button layoutX="398.0" layoutY="526.0" mnemonicParsing="false" onAction="#clickRemoveSongPlaylist" style="-fx-background-color: green;" text="Delete" />
       <Button layoutX="542.0" layoutY="526.0" mnemonicParsing="false" onAction="#clickNewSong" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: green;" text="New" />
-      <Button layoutX="624.0" layoutY="526.0" mnemonicParsing="false" onAction="#clickEditSong" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: green;" text="Edit" />
+      <Button layoutX="624.0" layoutY="526.0" mnemonicParsing="false" onAction="#clickEditSongs" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: green;" text="Edit" />
       <Button layoutX="703.0" layoutY="526.0" mnemonicParsing="false" onAction="#clickDeleteSong" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: green;" text="Delete" />
       <Button cancelButton="true" layoutX="934.0" layoutY="526.0" mnemonicParsing="false" onMouseClicked="#ExitTunes" style="-fx-background-color: green;" text="Close" />
       <Label layoutX="16.0" layoutY="84.0" text="Playlists" />
@@ -65,14 +65,6 @@
             <Insets left="2.0" />
          </padding>
       </Button>
-      <Button fx:id="ToggleUpSongPL" layoutX="256.0" layoutY="523.0" mnemonicParsing="false" onMouseReleased="#clickToggleUp" prefHeight="0.0" prefWidth="31.0" style="-fx-background-color: green;" text="⇧">
-         <font>
-            <Font size="15.0" />
-         </font></Button>
-      <Button fx:id="ToggleDownSongPL" layoutX="295.0" layoutY="524.0" mnemonicParsing="false" onMouseReleased="#clickToggleDown" prefHeight="17.0" prefWidth="31.0" style="-fx-background-color: green;" text="⇩">
-         <font>
-            <Font size="15.0" />
-         </font></Button>
       <Button fx:id="btnPreviousSong" layoutX="405.0" layoutY="56.0" mnemonicParsing="false" onAction="#PlayPreviousSong" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="&lt;-">
          <padding>
             <Insets bottom="5.0" right="2.0" />

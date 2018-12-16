@@ -58,10 +58,10 @@ public class MainWindowController implements Initializable
     @FXML
     private Slider volumeSlider;
     private Button exitBtn;
-    @FXML
-    private Button ToggleUpSongPL;
-    @FXML
-    private Button ToggleDownSongPL;
+    //@FXML
+    //private Button ToggleUpSongPL;
+    //@FXML
+    //private Button ToggleDownSongPL;
     private TuneModel tm;
     private String songPath;
     private Songs song = null;
@@ -216,19 +216,7 @@ public class MainWindowController implements Initializable
         }
     }
 
-    @FXML
-    private void clickEditSong(ActionEvent event) throws IOException 
-    {
-        Songs SongToEdit = tblViewLibrary.getSelectionModel().getSelectedItem();
-        tm.setSong(SongToEdit);
-        if (tblViewLibrary.getSelectionModel().getSelectedItem() != null)
-        {
-            int id = tblViewLibrary.getSelectionModel().getSelectedItem().getsongId();
-            String path = "/mytunes/GUI/view/Editsong.fxml";
-            boolean edit = true;
-            openSongWindow(path, id, edit);
-        }
-    }
+   
 
    
 
@@ -266,16 +254,7 @@ public class MainWindowController implements Initializable
         }
     }
 
-    @FXML
-    private void clickNewPlaylist(ActionEvent event) throws IOException  
-    {
-        int id = 0;
-        String path = "/mytunes/GUI/view/PlaylistWindow.fxml";
-        Playlists playlist = null;
-        tm.setPlaylist(playlist);
-        boolean edit = false;
-        openPlaylistWindow(path, id, edit);
-    }
+   
 
     @FXML
     private void clickEditPlaylist(ActionEvent event) throws IOException 
@@ -482,19 +461,40 @@ public class MainWindowController implements Initializable
         }
     }
 
-    
+    @FXML
+    private void clickNewPlaylist(ActionEvent event) throws IOException  
+    {
+        int id = 0;
+        String path = "/mytunes/GUI/view/PlaylistWindow.fxml";
+        Playlists playlist = null;
+        tm.setPlaylist(playlist);
+        boolean edit = false;
+        openPlaylistWindow(path, id, edit);
+    }
 
     @FXML
     private void clickNewSong(ActionEvent event)
     {
-        Songs NewSong = null;
-        tm.setSong(NewSong);
-        String path = "/mytunes/GUI/view/NewSong.fxml";
         int id = 0;
-        boolean isEditing = false;
-        openSongWindow(path, id, isEditing);
+        String path = "/mytunes/GUI/view/NewSong.fxml";
+        Songs Song = null;
+        tm.setSong(Song);
+        boolean edit = false;
+        openSongWindow(path, id, edit);
     }
-
+    @FXML
+    private void clickEditSongs(ActionEvent event)
+    {
+        Songs SongToEdit = tblViewLibrary.getSelectionModel().getSelectedItem();
+        tm.setSong(SongToEdit);
+        if (tblViewLibrary.getSelectionModel().getSelectedItem() != null)
+        {
+            int id = tblViewLibrary.getSelectionModel().getSelectedItem().getsongId();
+            String path = "/mytunes/GUI/view/EditSong.fxml";
+            boolean edit = true;
+            openEditWindow(path, id, edit);
+        }
+    }
     @FXML
     private void dblClickPlay(MouseEvent event) throws IOException
     {
@@ -555,7 +555,7 @@ public class MainWindowController implements Initializable
         
     }
 
-
+/**
     @FXML
     private void clickToggleUp(MouseEvent event)
     {
@@ -596,7 +596,7 @@ public class MainWindowController implements Initializable
             }
         }
     }
-
+*/
     @FXML
     private void clickPlaylist(MouseEvent event)
     {
@@ -609,6 +609,7 @@ public class MainWindowController implements Initializable
         }
     }
 
+   
     private class progressUpdate implements Runnable
     {
 
@@ -667,7 +668,7 @@ public class MainWindowController implements Initializable
         tblViewPlaylists.getItems().clear();
         tblViewPlaylists.setItems(tm.getPlaylistsAsObservable());
     }
-    // This will open our EditSong fxml
+    // This will bind a chosen button to open up our NewSong window
     public void openSongWindow(String path, int id, boolean edit)
     {
         try
@@ -675,7 +676,7 @@ public class MainWindowController implements Initializable
             Parent roots;
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
             roots = (Parent) fxmlLoader.load();
-            fxmlLoader.<EditSongController>getController().setController(this, edit, id);
+            fxmlLoader.<NewSongController>getController().setController(this, edit, id);
             Stage stage = new Stage();
             stage.setScene(new Scene(roots));
             stage.initStyle(StageStyle.UNDECORATED);
@@ -686,7 +687,7 @@ public class MainWindowController implements Initializable
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    // This will open our PlaylistWindow 
+     // This will bind a chosen button to open up our Playlist window
     public void openPlaylistWindow(String path, int id, boolean edit) 
     {
         try
@@ -704,5 +705,27 @@ public class MainWindowController implements Initializable
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+     // This will bind a chosen button to open up our EditSong window
+    public void openEditWindow(String path, int id, boolean edit)
+    {
+        try
+        {
+            Parent roots;
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+            roots = (Parent) fxmlLoader.load();
+            fxmlLoader.<EditSongController>getController().setController(this, edit, id);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(roots));
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    
+    
     }
 }
