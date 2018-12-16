@@ -15,7 +15,7 @@
    <children>
       <Slider fx:id="volumeSlider" layoutX="486.0" layoutY="68.0" orientation="VERTICAL" prefHeight="67.0" prefWidth="27.0" />
       <TableView fx:id="tblViewPlaylists" layoutX="14.0" layoutY="108.0" minHeight="400.0" minWidth="200.0" onMouseClicked="#getSongsFromPlaylist" prefHeight="410.0" prefWidth="220.0" style="-fx-background-color: green;" />
-      <Button layoutX="472.0" layoutY="286.0" mnemonicParsing="false" onAction="#clickPushSongPressed" prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: green;" text="&lt;" textAlignment="CENTER">
+      <Button layoutX="472.0" layoutY="286.0" mnemonicParsing="false" onAction="#clickPushSongToPlaylist" prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: green;" text="&lt;" textAlignment="CENTER">
          <font>
             <Font size="25.0" />
          </font></Button>

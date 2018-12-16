@@ -549,27 +549,7 @@ public class MainWindowController implements Initializable
         }
     }
 
-    @FXML
-    private void clickPushSongPressed(ActionEvent event)
-    {
-                if (tblViewLibrary.getSelectionModel().getSelectedItem() != null)
-        {
-            Songs song = tblViewLibrary.getSelectionModel().getSelectedItem();
-            
-            songsAsObservable.add(song);
-            tblSongsOnPlaylist.getItems().clear();
-            tblSongsOnPlaylist.getItems().addAll(songsAsObservable);
-            
-            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
-            int index = tblViewPlaylists.getSelectionModel().getSelectedIndex();
-            tm.addSongToPlaylist(song, playlist);
-//            tblSongsOnPlaylist.getItems().clear();
-  //          tblSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
-            refreshTablePlaylist();
-            tblViewPlaylists.refresh();
-            tblViewPlaylists.getSelectionModel().select(index);
-        }
-    }
+   
 
     @FXML
     private void getSongsFromPlaylist(MouseEvent event)
@@ -582,6 +562,28 @@ public class MainWindowController implements Initializable
     @FXML
     private void selectSong(MouseEvent event)
     {
+    }
+
+    @FXML
+    private void clickPushSongToPlaylist(ActionEvent event)
+    {
+                 if (tblViewLibrary.getSelectionModel().getSelectedItem() != null)
+        {
+            Songs song = tblViewLibrary.getSelectionModel().getSelectedItem();
+            
+            songsAsObservable.add(song);
+            tblSongsOnPlaylist.getItems().clear();
+            tblSongsOnPlaylist.getItems().addAll(songsAsObservable);
+            
+            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
+            int index = tblViewPlaylists.getSelectionModel().getSelectedIndex();
+            tm.addSongToPlaylist(song, playlist);
+            tblSongsOnPlaylist.getItems().clear();
+            tblSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
+            refreshTablePlaylist();
+            tblViewPlaylists.refresh();
+            tblViewPlaylists.getSelectionModel().select(index);
+        }
     }
 
     
