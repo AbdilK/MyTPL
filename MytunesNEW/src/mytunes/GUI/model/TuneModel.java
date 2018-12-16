@@ -66,8 +66,8 @@ public class TuneModel {
         return olPlaylists;
     }
 
-    public void createPlaylist(Playlists p) {
-        mytune.createPlaylist(p);
+    public void createPlaylist(Playlists playlist) {
+        mytune.createPlaylist(playlist);
     }
 
     public void deletePlaylist(Playlists playlistToDelete) {
@@ -79,8 +79,8 @@ public class TuneModel {
         return p;
     }
 
-    public void updatePlaylist(Playlists p) {
-        mytune.updatePlaylist(p);
+    public void updatePlaylist(Playlists playlist) {
+        mytune.updatePlaylist(playlist);
     }
 
     public void createSong(int songId, String title, String artist, String genre, String duration, String songPath) {
@@ -113,12 +113,12 @@ public class TuneModel {
         return mytune.nextAvailablePlaylistID();
     }
 
-    public List<Songs> getPlaylistSongs(Playlists p) {
-        return mytune.getPlaylistSongs(p);
+    public List<Songs> getPlaylistSongs(Playlists playlist) {
+        return mytune.getPlaylistSongs(playlist);
     }
 
-    public void addSongToPlaylist(Songs s, Playlists p) {
-        mytune.addSongToPlaylist(s, p);
+    public void addSongToPlaylist(Songs song, Playlists playlist) {
+        mytune.addSongToPlaylist(song, playlist);
     }
 
     public void deleteSongFromPlaylistSongs(int id) {
