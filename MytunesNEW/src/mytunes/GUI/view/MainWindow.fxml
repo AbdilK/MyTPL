@@ -73,12 +73,12 @@
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="btnPreviousSong" layoutX="405.0" layoutY="56.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="&lt;-">
+      <Button fx:id="btnPreviousSong" layoutX="405.0" layoutY="56.0" mnemonicParsing="false" onAction="#PlayPreviousSong" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="&lt;-">
          <padding>
             <Insets bottom="5.0" right="2.0" />
          </padding>
       </Button>
-      <Button fx:id="btnNext" layoutX="562.0" layoutY="56.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="-&gt;">
+      <Button fx:id="btnNext" layoutX="562.0" layoutY="56.0" mnemonicParsing="false" onAction="#PlayNextSong" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 100; -fx-font-size: 15; -fx-background-color: green;" text="-&gt;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

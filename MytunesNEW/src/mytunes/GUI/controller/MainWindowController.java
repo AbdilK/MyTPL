@@ -424,35 +424,6 @@ public class MainWindowController implements Initializable
     {
         lblSongTitle.setText(Double.toString(volumeSlider.getValue()));
     }
-
-
-
-    private void nextReleased(MouseEvent event) 
-    {
-        ViewSongsOnPlaylist.getSelectionModel().selectNext();
-        try
-        {
-            playSelectedSong();
-        } catch (UnsupportedAudioFileException | IOException ex)
-        {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-
-    private void previousReleased(MouseEvent event) //Plays previous song on the list
-    {
-        ViewSongsOnPlaylist.getSelectionModel().selectPrevious();
-        try
-        {
-            playSelectedSong();
-        } catch (UnsupportedAudioFileException | IOException ex)
-        {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-    }
-
    
      @FXML
     private void clickToggleUpSongPressed(MouseEvent event) 
@@ -632,7 +603,32 @@ public class MainWindowController implements Initializable
         System.exit(1);
     }
 
-    
+    @FXML
+    private void PlayPreviousSong(ActionEvent event)
+    {
+        ViewSongsOnPlaylist.getSelectionModel().selectPrevious();
+        try
+        {
+            playSelectedSong();
+        } catch (UnsupportedAudioFileException | IOException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void PlayNextSong(ActionEvent event)
+    {
+        ViewSongsOnPlaylist.getSelectionModel().selectNext();
+        try
+        {
+            playSelectedSong();
+        } catch (UnsupportedAudioFileException | IOException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 
     private class progressUpdate implements Runnable
     {
