@@ -36,7 +36,7 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "SELECT name,title,artist,genre,duration,songPath,Songs.songid AS SongsID,playlistSongs.SongID AS playlistSongsID FROM Playlists JOIN playlistSongs ON Playlists.PlaylistID =  playlistSongs.playlistID JOIN Songs ON Songs.id = playlistSongs.SongID WHERE Playlists.PlaylistID=?";
+            String sql = "SELECT songs.songId, title, artist, genre, duration, songPath FROM PlaylistSongs JOIN Songs  ON PlaylistSongs.SongID =  Songs.songId JOIN  Playlists ON playlists.PlaylistID = Playlists.PlaylistID where Playlists.PlaylistID=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, playlist.getPlaylistId());
             ResultSet rs = ppst.executeQuery();
@@ -48,7 +48,7 @@ public class PLSDAO
                 String genre = rs.getString("genre");
                 String duration = rs.getString("duration");
                 String songPath = rs.getString("songPath");
-                int playlistUniqueID = rs.getInt("playlistSongsID");
+                int playlistUniqueID = rs.getInt("songId");
                 Songs song = new Songs(songId, title, artist, genre, duration, songPath);
                 song.setPlaylistUniqueID(playlistUniqueID);
                 songs.add(song);
@@ -67,9 +67,10 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "INSERT INTO PlaylistSongs (PlaylistID,SongID) VALUES (?,?)";
+            String sql = "INSERT INTO PlaylistSongs  VALUES (?,?, ?)";
             PreparedStatement ppst = con.prepareCall(sql);
-            ppst.setInt(1, playlist.getPlaylistId());
+            ppst.setInt(3, playlist.getPlaylistId());
+            ppst.setInt(1, song.getsongId());
             ppst.setInt(2, song.getsongId());
             ppst.execute();
         } catch (SQLServerException ex)

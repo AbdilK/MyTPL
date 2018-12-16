@@ -60,6 +60,7 @@ public class NewSongController implements Initializable {
         }
     }
 
+    @FXML
     private void clickChooseSong(ActionEvent event) throws IOException 
     {
         FileDialog fileD = new FileDialog(new JFrame());
@@ -71,12 +72,14 @@ public class NewSongController implements Initializable {
         }
     }
 
+    @FXML
     private void clickCancelNewSong(ActionEvent event) // Closes the SongEditor window
     {
         isEditing = false;
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
+    @FXML
     private void clickSaveSong(ActionEvent event) throws IOException // Saving data from SongEditor window
     {
         if (!isEditing) {

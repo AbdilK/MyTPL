@@ -36,11 +36,11 @@ public class PLDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "INSERT INTO Playlists (id,name) VALUES (?,?)";
+            String sql = "INSERT INTO Playlists VALUES (?,?)";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, p.getPlaylistId());
             ppst.setString(2, p.getPlaylistName());
-            ppst.execute();
+            ppst.executeUpdate();
         } catch (SQLServerException ex)
         {
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,10 +52,10 @@ public class PLDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM Playlists WHERE id=?";
+            String sql = "DELETE FROM Playlists WHERE PlaylistID=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, playlistToDelete.getPlaylistId());
-            ppst.execute();
+            ppst.executeUpdate();
         } catch (SQLServerException ex)
         {
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,7 +71,7 @@ public class PLDAO
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
                 Playlists plyls = new Playlists(id, name);
-                //ikke færdig ^
+                p.add(plyls);
             }
 
         } catch (SQLServerException ex) {
@@ -101,7 +101,7 @@ public class PLDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "SELECT MAX(id) FROM Playlists";
+            String sql = "SELECT MAX(PlaylistID) FROM Playlists";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             int id = 0;

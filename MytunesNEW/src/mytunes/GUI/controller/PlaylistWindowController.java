@@ -1,24 +1,32 @@
 package mytunes.GUI.controller;
 
 import java.net.URL;
+import java.util.Observable;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import mytunes.BE.Playlists;
 import mytunes.GUI.model.TuneModel;
 
 public class PlaylistWindowController implements Initializable
 {
-    @FXML
     private TextField NamePlaylist;
     private MainWindowController MainWController;
     private boolean isEditing = false;
     private int PlaylistNewID;
     private TuneModel tm;
     private Playlists playlist;
+    @FXML
+    private TextField txtNamePlaylist;
+    @FXML
+    private Button btnCancel;
+    @FXML
+    private Button btnSave;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -44,9 +52,9 @@ public class PlaylistWindowController implements Initializable
     {
         if (!isEditing)
         {
-            if (!"".equals(NamePlaylist.getText()))
+            if (!txtNamePlaylist.getText().isEmpty())
             {
-                Playlists playlist = new Playlists(tm.nextAvailablePlaylistID(), NamePlaylist.getText());
+                Playlists playlist = new Playlists(tm.nextAvailablePlaylistID(), txtNamePlaylist.getText());
                 tm.createPlaylist(playlist);
                 MainWController.refreshTablePlaylist();
                 ((Node) (event.getSource())).getScene().getWindow().hide();

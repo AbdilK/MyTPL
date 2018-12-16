@@ -60,10 +60,11 @@ public class TunesManager implements BLLLogicFacade
         List<Playlists> playlists;
         try
         {
+            System.out.println("test");
             return playlists = PlaylistDAO.getAllPlaylists();
         } catch (SQLException ex)
         {
-            Logger.getLogger(TunesManager.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return null;
     }

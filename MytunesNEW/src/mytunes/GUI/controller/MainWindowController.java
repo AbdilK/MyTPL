@@ -24,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -40,7 +41,7 @@ public class MainWindowController implements Initializable
 {
 
     @FXML
-    private ListView<Songs> tblSongsOnPlaylist;
+    private TableView<Songs> tblSongsOnPlaylist;
     @FXML
     private TextField textFieldFilterSearch;
     @FXML
@@ -56,63 +57,68 @@ public class MainWindowController implements Initializable
     private int songLenght;
     private double volume = 0;
     @FXML
-    private ImageView playBtn;
-    @FXML
     private Slider volumeSlider;
-    @FXML
-    private ImageView nxtBtn;
-    @FXML
-    private ImageView previousBtn;
-    @FXML
     private Button exitBtn;
     @FXML
-    private Button minimizeBtn;
+    private Button ToggleUpSongPL;
     @FXML
-    private ImageView ToggleUpSongPL;
-    @FXML
-    private ImageView ToggleDownSongPL;
-    @FXML
-    private ImageView PushSongLeft;
-    @FXML
-    private ImageView speaker;
+    private Button ToggleDownSongPL;
     private TuneModel tm;
     private String songPath;
     private Songs song = null;
     private Duration songDuration;
     private ObservableList songsAsObservable;
-    private ObservableList playlistsAsObservable;
+    private ObservableList<Playlists>playlistsAsObservable;
+    
     private ObservableList searchedSongsAsObservable;
-    @FXML
     private TableColumn<Songs, String> titleCol;
-    @FXML
     private TableColumn<Songs, String> artistCol;
-    @FXML
     private TableColumn<Songs, String> genreCol;
-    @FXML
     private TableColumn<Songs, String> durationCol;
-    @FXML
     private ProgressBar progressBar;
-    @FXML
     private TableColumn<Playlists, String> playlistNameCol;
-    @FXML
     private TableColumn<Playlists, Integer> playlistSongsCol;
-    @FXML
     private TableColumn<Playlists, String> playlistDurationCol;
-    @FXML
     private ProgressBar songProgress;
-    @FXML
     private Label songTimeLabel;
     @FXML
     private Label currentTimeLabel;
-    @FXML
     private Slider progressSlider;
+    @FXML
+    private AnchorPane grey;
+    @FXML
+    private TableColumn<?, ?> tblViewLibraryColumnTitle;
+    @FXML
+    private TableColumn<?, ?> tblViewLibraryColumnArtist;
+    @FXML
+    private TableColumn<?, ?> tblViewLibraryColumnGenre;
+    @FXML
+    private TableColumn<?, ?> tblViewLibraryColumnDuration;
+    @FXML
+    private Button btnDeletePlaylists;
+    @FXML
+    private Label labelCurrentlyPlaying;
+    @FXML
+    private Button btnPlay;
+    @FXML
+    private Button btnReplay;
+    @FXML
+    private Button btnStop;
+    @FXML
+    private Button btnPreviousSong;
+    @FXML
+    private Button btnNext;
+    @FXML
+    private TableColumn<?, ?> columnSongsInPlaylist;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        
+        playlistsAsObservable = FXCollections.observableArrayList();
+        progressBar = new ProgressBar(0.5);
         isPlaying = false;
         searchedSongsAsObservable = FXCollections.observableArrayList();
-        progressBar.setProgress(0.5);
         muted = false;
         volumeSlider.setMax(1.0);
         volumeSlider.setMin(0);
@@ -127,6 +133,7 @@ public class MainWindowController implements Initializable
                 volume = newValue.doubleValue();
             }
         });
+        progressSlider = new Slider();
         progressSlider.setMax(1.0);
         progressSlider.setMin(0);
         progressSlider.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
@@ -145,7 +152,14 @@ public class MainWindowController implements Initializable
 
     public void setSongsTable() // This method gets all songs from database and loeads it into tableSongs
     {
+        
+        
         songsAsObservable = FXCollections.observableArrayList(tm.getSongsAsObservable());
+        artistCol = new TableColumn<>("Artist");
+        titleCol = new TableColumn<>("Title");
+        genreCol = new TableColumn<>("Genre");
+        durationCol = new TableColumn<>("Duration");
+        
         artistCol.setCellValueFactory(new PropertyValueFactory<>("artist"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         genreCol.setCellValueFactory(new PropertyValueFactory<>("genre"));
@@ -153,18 +167,26 @@ public class MainWindowController implements Initializable
         tblViewLibrary.getColumns().clear();
         tblViewLibrary.setItems(songsAsObservable);
         tblViewLibrary.getColumns().addAll(titleCol, artistCol, genreCol, durationCol);
+        tblSongsOnPlaylist.getColumns().add(titleCol);
+
        
     }
 
     private void setPlaylistTable() // This method gets all playlists from database and loeads it into tablePlaylist
     {
-        playlistsAsObservable = FXCollections.observableArrayList(tm.getPlaylistsAsObservable());
-        playlistNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        playlistSongsCol.setCellValueFactory(new PropertyValueFactory<>("countOfSongsOnPlaylist"));
-        playlistDurationCol.setCellValueFactory(new PropertyValueFactory<>("durationOfPlaylist"));
-        tblViewPlaylists.getColumns().clear();
-        tblViewPlaylists.setItems(playlistsAsObservable);
-        tblViewPlaylists.getColumns().addAll(playlistNameCol, playlistSongsCol, playlistDurationCol);
+        
+        
+        playlistNameCol = new TableColumn<>("Name");
+        playlistSongsCol = new TableColumn<>("ID");
+        //playlistDurationCol = new TableColumn<>();
+        
+        playlistNameCol.setCellValueFactory(new PropertyValueFactory<>("PlaylistName"));
+        playlistSongsCol.setCellValueFactory(new PropertyValueFactory<>("PlaylistId"));
+       // playlistDurationCol.setCellValueFactory(new PropertyValueFactory<>("durationOfPlaylist"));'
+       tblViewPlaylists.setItems(tm.getPlaylistsAsObservable());
+            tblViewPlaylists.getColumns().addAll(playlistNameCol, playlistSongsCol);
+        
+    
       
     }
 
@@ -291,10 +313,12 @@ public class MainWindowController implements Initializable
         }
     }
 
+    @FXML
     private void playSelectedSong() throws UnsupportedAudioFileException, IOException 
     {
         if (song == null)
         {
+            song = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
             setMusicPlayer();
             Runnable runnable = new progressUpdate();
             Thread thread = new Thread(runnable);
@@ -332,10 +356,10 @@ public class MainWindowController implements Initializable
         }
         song = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
         songPath = song.getSongPath();
-        hit = new Media(new File(songPath).toURI().toString());
+        hit = new Media(new File(songPath + song.getTitle()).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
-        songTimeLabel.setText(song.getDuration());
-        lblSongTitle.setText(song.getArtist() + "|" + song.getTitle());
+       
+       lblSongTitle.setText(song.getArtist() + "|" + song.getTitle());
         if (volume != 0)
         {
             mediaPlayer.setVolume(volume);
@@ -348,7 +372,6 @@ public class MainWindowController implements Initializable
         });
     }
 
-    @FXML
     private void playReleased(MouseEvent event) throws UnsupportedAudioFileException, IOException 
     {
         if (!isPlaying)
@@ -371,7 +394,6 @@ public class MainWindowController implements Initializable
         }
     }
 
-    @FXML
     private void doubleClickToPlay(MouseEvent event) throws IOException // This method allowes us to play song by double-click
     {
         if (event.getClickCount() == 2)
@@ -406,7 +428,6 @@ public class MainWindowController implements Initializable
 
 
 
-    @FXML
     private void nextReleased(MouseEvent event) 
     {
         tblSongsOnPlaylist.getSelectionModel().selectNext();
@@ -420,7 +441,6 @@ public class MainWindowController implements Initializable
     }
 
 
-    @FXML
     private void previousReleased(MouseEvent event) //Plays previous song on the list
     {
         tblSongsOnPlaylist.getSelectionModel().selectPrevious();
@@ -434,13 +454,11 @@ public class MainWindowController implements Initializable
        
     }
 
-    @FXML
     private void clickCloseProgram (MouseEvent event) 
     {
         System.exit(1);
     }
 
-    @FXML
     private void Minimize(MouseEvent event)
     {
         Stage stage = (Stage) exitBtn.getScene().getWindow();
@@ -492,24 +510,8 @@ public class MainWindowController implements Initializable
    }
 
 
-    @FXML
-    private void clickPushSongPressed(MouseEvent event)
-    {
-        if (tblViewLibrary.getSelectionModel().getSelectedItem() != null && tblViewPlaylists.getSelectionModel().getSelectedItem() != null)
-        {
-            Songs song = tblViewLibrary.getSelectionModel().getSelectedItem();
-            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
-            int index = tblViewPlaylists.getSelectionModel().getSelectedIndex();
-            tm.addSongToPlaylist(song, playlist);
-            tblSongsOnPlaylist.getItems().clear();
-            tblSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
-            refreshTablePlaylist();
-            tblViewPlaylists.refresh();
-            tblViewPlaylists.getSelectionModel().select(index);
-        }
-       }
 
-    @FXML
+
     private void youClickedPlaylist(MouseEvent event) 
     {
         if (tblViewPlaylists.getSelectionModel().getSelectedItem() != null)
@@ -539,13 +541,47 @@ public class MainWindowController implements Initializable
         }
     }
 
-    @FXML
     private void enterSearch(KeyEvent event) 
     {
         if (event.getCode() == KeyCode.ENTER && textFieldFilterSearch.isFocused())
         {
             search();
         }
+    }
+
+    @FXML
+    private void clickPushSongPressed(ActionEvent event)
+    {
+                if (tblViewLibrary.getSelectionModel().getSelectedItem() != null)
+        {
+            Songs song = tblViewLibrary.getSelectionModel().getSelectedItem();
+            
+            songsAsObservable.add(song);
+            tblSongsOnPlaylist.getItems().clear();
+            tblSongsOnPlaylist.getItems().addAll(songsAsObservable);
+            
+            Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
+            int index = tblViewPlaylists.getSelectionModel().getSelectedIndex();
+            tm.addSongToPlaylist(song, playlist);
+//            tblSongsOnPlaylist.getItems().clear();
+  //          tblSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
+            refreshTablePlaylist();
+            tblViewPlaylists.refresh();
+            tblViewPlaylists.getSelectionModel().select(index);
+        }
+    }
+
+    @FXML
+    private void getSongsFromPlaylist(MouseEvent event)
+    {
+        Playlists playlist = tblViewPlaylists.getSelectionModel().getSelectedItem();
+        ObservableList obsList = FXCollections.observableArrayList(tm.getPlaylistSongs(playlist));
+        tblSongsOnPlaylist.setItems(obsList);
+    }
+
+    @FXML
+    private void selectSong(MouseEvent event)
+    {
     }
 
     
@@ -580,6 +616,7 @@ public class MainWindowController implements Initializable
     private void updateProgressBar(final double currentTime)
     {
         double fractionalProgress = (double) currentTime / (double) songLenght;
+        songProgress = new ProgressBar();
         songProgress.setProgress(fractionalProgress);
     }
 
@@ -601,7 +638,7 @@ public class MainWindowController implements Initializable
         tblViewLibrary.getItems().clear();
         tblViewLibrary.setItems(tm.getSongsAsObservable());
     }
-
+    
     public void refreshTablePlaylist() 
     {
         tblViewPlaylists.getItems().clear();
