@@ -19,7 +19,7 @@ public class MyTunes extends Application
     @Override
     public void start(Stage pStage) throws Exception
     {
-        pStage.setTitle("DankTunes");
+        pStage.setTitle("GreenTunes");
         pStage.centerOnScreen();
         pStage.getIcons().add(new Image("mytunes/logo/MPLogo.png"));
         Parent root = FXMLLoader.load(getClass().getResource("/mytunes/GUI/view/MainWindow.fxml")); //getClassLoader added to avoid NullPointerException
