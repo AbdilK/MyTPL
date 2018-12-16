@@ -31,12 +31,12 @@ public class SONGDAO
         db = new DBConnectionProvider();
     }
 
-    public Songs createSong(int songId, String artist, String title, String genre, String duration, String songPath) throws SQLException
+    public Songs createSong(int songId, String title, String artist, String genre, String duration, String songPath) throws SQLException
     {
         {
             try (Connection con = db.getConnection())
             {
-                String sql = "INSERT INTO Songs(songId, title, artist,genre, duration,songPath) VALUES(?,?,?,?,?,?)";
+                String sql = "INSERT INTO Songs(songId, title, artist ,genre, duration, songPath) VALUES(?,?,?,?,?,?)";
                 PreparedStatement ppst = con.prepareStatement(sql);
                 ppst.setInt(1, songId);
                 ppst.setString(2, title);
@@ -56,11 +56,16 @@ public class SONGDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM Songs WHERE songId = ? " + "DELETE FORM PlaylistSongs WHERE PlaylistSongs.SongID = ?";
+            String sql = "DELETE FROM Songs WHERE songId = ? ";
+            String sqll = "DELETE FORM PlaylistSongs WHERE PlaylistSongs.SongID = ?"; // NOT FINISH
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setInt(1, song.getsongId());
             ppst.setInt(2, song.getsongId());
+            PreparedStatement ppstt = con.prepareStatement(sqll);
+            ppstt.setInt(1, song.getsongId());
+            ppstt.setInt(2, song.getsongId());
             ppst.execute();
+            ppstt.execute();
         } catch (SQLServerException ex)
         {
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
