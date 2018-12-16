@@ -453,18 +453,8 @@ public class MainWindowController implements Initializable
        
     }
 
-    private void clickCloseProgram (MouseEvent event) 
-    {
-        System.exit(1);
-    }
-
-    private void Minimize(MouseEvent event)
-    {
-        Stage stage = (Stage) exitBtn.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-    @FXML
+   
+     @FXML
     private void clickToggleUpSongPressed(MouseEvent event) 
     {
         
@@ -634,6 +624,12 @@ public class MainWindowController implements Initializable
                 Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    @FXML
+    private void ExitTunes(MouseEvent event)
+    {
+        System.exit(1);
     }
 
     

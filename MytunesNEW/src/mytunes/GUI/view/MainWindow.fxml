@@ -35,7 +35,7 @@
       <Button layoutX="542.0" layoutY="526.0" mnemonicParsing="false" onAction="#clickNewSong" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: green;" text="New" />
       <Button layoutX="624.0" layoutY="526.0" mnemonicParsing="false" onAction="#clickEditSong" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: green;" text="Edit" />
       <Button layoutX="703.0" layoutY="526.0" mnemonicParsing="false" onAction="#clickDeleteSong" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: green;" text="Delete" />
-      <Button cancelButton="true" layoutX="934.0" layoutY="526.0" mnemonicParsing="false" style="-fx-background-color: green;" text="Close" />
+      <Button cancelButton="true" layoutX="934.0" layoutY="526.0" mnemonicParsing="false" onMouseClicked="#ExitTunes" style="-fx-background-color: green;" text="Close" />
       <Label layoutX="16.0" layoutY="84.0" text="Playlists" />
       <Label layoutX="256.0" layoutY="84.0" text="Songs on Playlist" />
       <Label layoutX="542.0" layoutY="84.0" style="-fx-skin: grey;" text="All songs" />
