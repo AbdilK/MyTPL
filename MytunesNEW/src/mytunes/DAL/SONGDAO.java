@@ -56,9 +56,10 @@ public class SONGDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM Songs WHERE id=?";
+            String sql = "DELETE FROM Songs WHERE songId = ? " + "DELETE FORM PlaylistSongs WHERE PlaylistSongs.SongID = ?";
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setInt(1, song.getsongId());
+            ppst.setInt(2, song.getsongId());
             ppst.execute();
         } catch (SQLServerException ex)
         {
@@ -146,7 +147,7 @@ public class SONGDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "SELECT MAX(id) FROM Songs";
+            String sql = "SELECT MAX(songId) FROM Songs";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             int id = 0;

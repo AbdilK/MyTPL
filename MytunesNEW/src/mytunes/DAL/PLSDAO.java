@@ -36,7 +36,9 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "SELECT songs.songId, title, artist, genre, duration, songPath FROM PlaylistSongs JOIN Songs  ON PlaylistSongs.SongID =  Songs.songId JOIN  Playlists ON playlists.PlaylistID = Playlists.PlaylistID where Playlists.PlaylistID=?";
+            String sql = "SELECT Songs.songId, title, artist, genre, duration, songPath FROM Songs " +
+                "JOIN PlaylistSongs ON PlaylistSongs.SongID = Songs.songId " +
+                "JOIN Playlists ON PlaylistSongs.PlaylistID = Playlists.PlaylistID WHERE Playlists.PlaylistID = ?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, playlist.getPlaylistId());
             ResultSet rs = ppst.executeQuery();
@@ -83,7 +85,7 @@ public class PLSDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM PlaylistSongs WHERE ID=?";
+            String sql = "DELETE FROM PlaylistSongs WHERE SongID=?";                  
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
             ppst.execute();

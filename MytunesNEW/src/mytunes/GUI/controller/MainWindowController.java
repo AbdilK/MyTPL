@@ -167,7 +167,7 @@ public class MainWindowController implements Initializable
         tblViewLibrary.getColumns().addAll(tblViewLibraryColumnTitle, tblViewLibraryColumnArtist, tblViewLibraryColumnGenre, tblViewLibraryColumnDuration);
         ViewSongsOnPlaylist.getColumns().add(tblViewLibraryColumnTitle);
         * 
-       */ 
+        */ 
         songsAsObservable = FXCollections.observableArrayList(tm.getSongsAsObservable());
         tblViewLibraryColumnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         tblViewLibraryColumnArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
@@ -215,10 +215,6 @@ public class MainWindowController implements Initializable
             tblViewPlaylists.getSelectionModel().select(index);
         }
     }
-
-   
-
-   
 
     @FXML
     private void clickDeleteSong(ActionEvent event) 
@@ -371,33 +367,6 @@ public class MainWindowController implements Initializable
             
         }
     }
-
-    private void doubleClickToPlay(MouseEvent event) throws IOException // This method allowes us to play song by double-click
-    {
-        if (event.getClickCount() == 2)
-        {
-            try
-            {
-                if (!isPlaying)
-                {
-                    isPlaying = true;
-                    playSelectedSong();
-                    mediaPlayer.setMute(muted);
-                    
-                } else
-                {
-                    isPlaying = true;
-                    playSelectedSong();
-                    mediaPlayer.setMute(muted);
-                    
-                }
-            } catch (UnsupportedAudioFileException ex)
-            {
-                Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
     
     private void getSliderValue(DragEvent event)
     {

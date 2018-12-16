@@ -66,8 +66,11 @@ public class NewSongController implements Initializable {
         FileDialog fileD = new FileDialog(new JFrame());
         fileD.setVisible(true);
         File[] Path = fileD.getFiles();
-        if (Path.length > 0) {
-            String filePath = "src\\mytunes\\MusicLibrary" + fileD.getFiles()[0].getName();
+        Path[0].getName();
+        if (Path.length > 0) 
+        {
+            TitleBox.setText(Path[0].getName());
+            String filePath = "./src/mytunes/MusicLibrary/";
             FilePathBox.setText(filePath);
         }
     }
