@@ -223,11 +223,11 @@ public class MainWindowController implements Initializable
     @FXML
     private void clickDeleteSong(ActionEvent event) 
     {
-        Songs ToDeleteSong = tblViewLibrary.getSelectionModel().getSelectedItem();
+        Songs ToDeleteSong = tblViewLibrary.getSelectionModel().getSelectedItem();   // "some text\nmore text in a new line"
         if (ToDeleteSong != null)
         {
             String name = ToDeleteSong.getTitle() + " " + ToDeleteSong.getArtist();
-            Alert alert = new Alert(AlertType.CONFIRMATION, "Click YES to confirm deletion of the chosen song " + name + " Click OK to delete song from Database only and DELETEALL to delete from PC and Database", ButtonType.YES, ButtonType.OK, ButtonType.NO);
+            Alert alert = new Alert(AlertType.CONFIRMATION, "Click YES to delete the chosen song " + name + " from your library and database.\nClick OK to delete song from Database only\nClick NO to cancel your current action", ButtonType.YES, ButtonType.OK, ButtonType.NO);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.OK)
             {
@@ -495,6 +495,7 @@ public class MainWindowController implements Initializable
             openEditWindow(path, id, edit);
         }
     }
+    
     @FXML
     private void dblClickPlay(MouseEvent event) throws IOException
     {
