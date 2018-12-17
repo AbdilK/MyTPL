@@ -57,13 +57,10 @@ public class MainWindowController implements Initializable
     @FXML
     private Slider volumeSlider;
     private Button exitBtn;
-    //@FXML
-    //private Button ToggleUpSongPL;
-    //@FXML
-    //private Button ToggleDownSongPL;
     private TuneModel tm;
     private String songPath;
     private Songs song = null;
+    private Songs song1 = null;
     private Duration songDuration;
     private ObservableList songsAsObservable;
     private ObservableList<Playlists> playlistsAsObservable;
@@ -105,7 +102,7 @@ public class MainWindowController implements Initializable
     private Button btnNext;
     @FXML
     private ListView<Songs> ViewSongsOnPlaylist;
-
+    // This initializes our observables, progressbar, volumenSlider and such.
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -144,36 +141,11 @@ public class MainWindowController implements Initializable
         setSongsTable();
         setPlaylistTable();
     }
-
-    public void setSongsTable() // This method gets all songs from database and loeads it into tableSongs
+    // The method underneath gets all songs from our database and loads it into our song library table, with the given string.
+    public void setSongsTable() 
     {
 
-        /**
-         * songsAsObservable =
-         * FXCollections.observableArrayList(tm.getSongsAsObservable());
-         *
-         * tblViewLibraryColumnTitle = new TableColumn<>("Title");
-         * tblViewLibraryColumnArtist = new TableColumn<>("Artist");
-         * tblViewLibraryColumnGenre = new TableColumn<>("Genre");
-         * tblViewLibraryColumnDuration = new TableColumn<>("Duration");
-         *
-         *
-         * tblViewLibraryColumnTitle.setCellValueFactory(new
-         * PropertyValueFactory<>("title"));
-         * tblViewLibraryColumnArtist.setCellValueFactory(new
-         * PropertyValueFactory<>("artist"));
-         * tblViewLibraryColumnGenre.setCellValueFactory(new
-         * PropertyValueFactory<>("genre"));
-         * tblViewLibraryColumnDuration.setCellValueFactory(new
-         * PropertyValueFactory<>("duration"));
-         * tblViewLibrary.getColumns().clear();
-         * tblViewLibrary.setItems(songsAsObservable);
-         * tblViewLibrary.getColumns().addAll(tblViewLibraryColumnTitle,
-         * tblViewLibraryColumnArtist, tblViewLibraryColumnGenre,
-         * tblViewLibraryColumnDuration);
-         * ViewSongsOnPlaylist.getColumns().add(tblViewLibraryColumnTitle);
-         *
-         */
+        
         songsAsObservable = FXCollections.observableArrayList(tm.getSongsAsObservable());
         tblViewLibraryColumnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         tblViewLibraryColumnArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
@@ -184,8 +156,8 @@ public class MainWindowController implements Initializable
         tblViewLibrary.getColumns().addAll(tblViewLibraryColumnTitle, tblViewLibraryColumnArtist, tblViewLibraryColumnGenre, tblViewLibraryColumnDuration);
 
     }
-
-    private void setPlaylistTable() // This method gets all playlists from database and loeads it into tablePlaylist
+   // The method underneath gets all playlists from our database and loads it into our playlist library table, with the given string.
+    private void setPlaylistTable() 
     {
 
         playlistNameCol = new TableColumn<>("Name");
@@ -199,7 +171,7 @@ public class MainWindowController implements Initializable
         tblViewPlaylists.getColumns().addAll(playlistNameCol, playlistSongsCol);
 
     }
-
+    // This removes a song from a chosen playlist, but does not delete the song from our database.
     @FXML
     private void clickRemoveSongPlaylist(ActionEvent event)
     {
@@ -217,11 +189,13 @@ public class MainWindowController implements Initializable
             tblViewPlaylists.getSelectionModel().select(index);
         }
     }
-
+    // This method deletes a specific song from our MusicLibrary and/or from our database.
+    // An alert box has been implemented to ask the user, if he/she wishes to delete the specifi song from
+    // the database, or the MusicLibrary folder only.
     @FXML
     private void clickDeleteSong(ActionEvent event)
     {
-        Songs ToDeleteSong = tblViewLibrary.getSelectionModel().getSelectedItem();   // "some text\nmore text in a new line"
+        Songs ToDeleteSong = tblViewLibrary.getSelectionModel().getSelectedItem();
         if (ToDeleteSong != null)
         {
             String name = ToDeleteSong.getTitle() + " " + ToDeleteSong.getArtist();
@@ -251,7 +225,7 @@ public class MainWindowController implements Initializable
             }
         }
     }
-
+//This method deletes a specific Playlist from our tblViewPlaylist table to the left.
     @FXML
     private void clickDeletePlaylist(ActionEvent event)
     {
@@ -272,22 +246,23 @@ public class MainWindowController implements Initializable
             }
         }
     }
-
+// This plays a selected song from our PlaylistSongs table. The play button also changes, depending on whether the song is playing or not.
     @FXML
     private void playSelectedSong() throws UnsupportedAudioFileException, IOException
     {
         
-        if (song == null)
+        if (song == null || song1 == null)
         {
             song = ViewSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            song1 = tblViewLibrary.getSelectionModel().getSelectedItem();
             setMusicPlayer();
             Runnable runnable = new progressUpdate();
             Thread thread = new Thread(runnable);
             thread.start();
-        } else if (song == ViewSongsOnPlaylist.getSelectionModel().getSelectedItem())
+        } else if (song == ViewSongsOnPlaylist.getSelectionModel().getSelectedItem() || song1 == tblViewLibrary.getSelectionModel().getSelectedItem() )
         {
             mediaPlayer.play();
-        } else if (song != ViewSongsOnPlaylist.getSelectionModel().getSelectedItem() && ViewSongsOnPlaylist.getSelectionModel().getSelectedItem() != null)
+        } else if (song != ViewSongsOnPlaylist.getSelectionModel().getSelectedItem() && ViewSongsOnPlaylist.getSelectionModel().getSelectedItem() != null || song != tblViewLibrary.getSelectionModel().getSelectedItem() && tblViewLibrary.getSelectionModel().getSelectedItem() != null)
         {
             setMusicPlayer();
         } else
@@ -307,11 +282,12 @@ public class MainWindowController implements Initializable
             setMusicPlayer();
             mediaPlayer.play();
         });
+        
         if (tblViewLibrary.getItems().isEmpty())
         {
             Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("No selection");
-            alert.setHeaderText("No song selected");
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No song has been selected");
             alert.setContentText("Please select a song in the library");
             alert.showAndWait();
         } else
@@ -328,7 +304,12 @@ public class MainWindowController implements Initializable
         }
 
     }
+    private void getSliderVolume(DragEvent event)
+    {
+        lblSongTitle.setText(Double.toString(volumeSlider.getValue()));
 
+    }
+// This is playing our musicplayer, which gets the song information from a songs given title and artist.
     private void setMusicPlayer()
     {
         if (mediaPlayer != null)
@@ -353,33 +334,7 @@ public class MainWindowController implements Initializable
         });
     }
 
-    private void playReleased(MouseEvent event) throws UnsupportedAudioFileException, IOException
-    {
-        if (!isPlaying)
-        {
-            isPlaying = true;
-            if (ViewSongsOnPlaylist.getSelectionModel().getSelectedItem() != null || song != null)
-            {
-                playSelectedSong();
-                mediaPlayer.setMute(muted);
-            }
-            //playBtn.setImage(new Image("mytunes/pausebtn.png"));
-        } else
-        {
-            isPlaying = false;
-            if (song != null)
-            {
-                mediaPlayer.pause();
-            }
-
-        }
-    }
-
-    private void getSliderValue(DragEvent event)
-    {
-        lblSongTitle.setText(Double.toString(volumeSlider.getValue()));
-
-    }
+    
 
     private void search()
     {

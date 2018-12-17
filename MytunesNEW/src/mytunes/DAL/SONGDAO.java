@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mytunes.BE.Playlists;
 import mytunes.BE.Songs;
 
 public class SONGDAO
@@ -56,17 +57,19 @@ public class SONGDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE Songs , PlaylistSongs FROM Songs INNER JOIN PlaylistSongs WHERE Songs.songId= PlaylistSongs.SongID AND Songs.songId = ?";
-            //String sql = "DELETE FROM Songs WHERE songId = ?";
-            //String sqll = "DELETE FROM PlaylistSongs WHERE PlaylistSongs.SongID = ?"; // NOT FINISH
+            //String sql = "DELETE Songs , PlaylistSongs FROM Songs INNER JOIN PlaylistSongs WHERE Songs.songId= PlaylistSongs.SongID AND Songs.songId = ?";
+            String sql = "DELETE FROM Songs WHERE songId = ?";
+            // NOT FINISH
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setInt(1, song.getsongId());
-            //ppst.setInt(2, song.getsongId());
-            //PreparedStatement ppstt = con.prepareStatement(sqll);
-            //ppstt.setInt(1, song.getsongId());
-            //ppstt.setInt(2, song.getsongId());
             ppst.execute();
-            //ppstt.execute();
+            //ppst.setInt(2, song.getsongId());
+            String sqll = "DELETE FROM PlaylistSongs WHERE PlaylistSongs.SongID = ?"; 
+            PreparedStatement ppstt = con.prepareStatement(sqll);
+            ppstt.setInt(1, song.getsongId());
+            //ppstt.setInt(2, song.getsongId());
+           
+            ppstt.execute();
         } catch (SQLServerException ex)
         {
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
