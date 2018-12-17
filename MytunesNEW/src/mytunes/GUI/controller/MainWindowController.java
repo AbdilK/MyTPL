@@ -1,9 +1,10 @@
 package mytunes.GUI.controller;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.net.URL;
 import java.nio.file.Files;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -12,10 +13,6 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -28,6 +25,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import mytunes.BE.Playlists;
 import mytunes.BE.Songs;
@@ -52,15 +53,15 @@ public class MainWindowController implements Initializable
     private TableView<Songs> tblViewLibrary;
     private boolean isPlaying;
     private boolean muted;
-    private Media hit;
     private MediaPlayer mediaPlayer;
-    private int songLenght;
     private double volume = 0;
     @FXML
     private Slider volumeSlider;
     private Button exitBtn;
     private TuneModel tm;
     private String songPath;
+    private Media mp;
+    private int Length;
     private Songs song = null;
     private Songs song1 = null;
     private Duration songDuration;
@@ -135,7 +136,7 @@ public class MainWindowController implements Initializable
             songProgress.setProgress(newValue.doubleValue());
             if (song != null)
             {
-                Duration duration = Duration.seconds(songLenght * newValue.doubleValue());
+                Duration duration = Duration.seconds(Length * newValue.doubleValue());
                 mediaPlayer.seek(duration);
             }
         });
@@ -318,8 +319,8 @@ public class MainWindowController implements Initializable
         }
         song = ViewSongsOnPlaylist.getSelectionModel().getSelectedItem();
         songPath = song.getSongPath();
-        hit = new Media(new File(songPath + song.getTitle()).toURI().toString());
-        mediaPlayer = new MediaPlayer(hit);
+        mp = new Media(new File(songPath + song.getTitle()).toURI().toString());
+        mediaPlayer = new MediaPlayer(mp);
 
         lblSongTitle.setText(song.getArtist() + "|" + song.getTitle());
         if (volume != 0)
@@ -328,8 +329,8 @@ public class MainWindowController implements Initializable
         }
         mediaPlayer.setOnReady(() ->
         {
-            songLenght = (int) hit.getDuration().toSeconds();
-            songDuration = hit.getDuration();
+            Length = (int) mp.getDuration().toSeconds();
+            songDuration = mp.getDuration();
             mediaPlayer.play();
         });
     }
@@ -634,7 +635,7 @@ public class MainWindowController implements Initializable
 
     private void updateSongDurationCounter(final double currentTime)
     {
-        double fractionalProgress = (double) currentTime / (double) songLenght;
+        double fractionalProgress = (double) currentTime / (double) Length;
         songProgress = new ProgressBar();
         songProgress.setProgress(fractionalProgress);
     }
