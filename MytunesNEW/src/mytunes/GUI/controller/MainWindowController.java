@@ -32,8 +32,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import mytunes.BE.Playlists;
 import mytunes.BE.Songs;
 import mytunes.GUI.model.TuneModel;
-import mytunes.GUI.controller.PlaylistWindowController;
-import mytunes.GUI.controller.EditSongController;
 
 /*
  * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
