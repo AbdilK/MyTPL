@@ -16,6 +16,7 @@ import java.sql.Connection;
  */
 public class DBConnectionProvider
 {
+    //Login details with EASV database server ip, db name, user and password.
     private static final String SERVER_NAME = "10.176.111.31";
     private static final String DATABASE_NAME = "MyTunes1234";
     private static final String USER = "CS2018A_5";
@@ -23,6 +24,7 @@ public class DBConnectionProvider
            
     private final SQLServerDataSource db;
 
+    //tries to establish a connection to EASV database | Requires Tryllehat if outside EASV school. 
     public DBConnectionProvider() 
     {
         db = new SQLServerDataSource();
