@@ -56,16 +56,17 @@ public class SONGDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM Songs WHERE songId = ?";
-            String sqll = "DELETE FROM PlaylistSongs WHERE PlaylistSongs.SongID = ?"; // NOT FINISH
+            String sql = "DELETE Songs , PlaylistSongs FROM Songs INNER JOIN PlaylistSongs WHERE Songs.songId= PlaylistSongs.SongID AND Songs.songId = ?";
+            //String sql = "DELETE FROM Songs WHERE songId = ?";
+            //String sqll = "DELETE FROM PlaylistSongs WHERE PlaylistSongs.SongID = ?"; // NOT FINISH
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setInt(1, song.getsongId());
-            ppst.setInt(2, song.getsongId());
-            PreparedStatement ppstt = con.prepareStatement(sqll);
-            ppstt.setInt(1, song.getsongId());
-            ppstt.setInt(2, song.getsongId());
+            //ppst.setInt(2, song.getsongId());
+            //PreparedStatement ppstt = con.prepareStatement(sqll);
+            //ppstt.setInt(1, song.getsongId());
+            //ppstt.setInt(2, song.getsongId());
             ppst.execute();
-            ppstt.execute();
+            //ppstt.execute();
         } catch (SQLServerException ex)
         {
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
