@@ -59,7 +59,7 @@ public class EditSongController implements Initializable {
             comboGenre.getItems().add(genre);
         }
     }
-
+// This method allows us to pick the path of the while whilst we are editing or creating a song.
     @FXML
     private void clickChooseSong(ActionEvent event) throws IOException 
     {
@@ -71,16 +71,16 @@ public class EditSongController implements Initializable {
             FilePathBox.setText(filePath);
         }
     }
-
+// This closes the EditSong window
     @FXML
-    private void clickCancelEditSong(ActionEvent event) // Closes the SongEditor window
+    private void clickCancelEditSong(ActionEvent event) 
     {
         isEditing = false;
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
-    private void clickSaveEditsSong(ActionEvent event) throws IOException // Saving data from SongEditor window
+    private void clickSaveEditsSong(ActionEvent event) throws IOException // This saves that data that you put in the EditSong window
     {
         if (!isEditing) {
             if (!"".equals(TitleBox.getText()) && !"".equals(ArtistBox.getText()) && comboGenre.getSelectionModel().getSelectedItem() != null
@@ -115,7 +115,7 @@ public class EditSongController implements Initializable {
 
   
 
-    public void setController(MainWindowController controller, boolean isEditing, int songID) // We use this method to get connection with mainWindowController and distinguish if we are editing or creating.
+    public void setController(MainWindowController controller, boolean isEditing, int songID) // This method allows us to get connection with our MainWindowController and will check whether we are creating or editing
     {
         this.MainWController = controller;
         this.isEditing = isEditing;
