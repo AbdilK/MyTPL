@@ -30,7 +30,7 @@ public class PLDAO
         db = new DBConnectionProvider();
         DankPlaylist = new PLSDAO();
     }
-
+// This method creats a playlist in and stores it in our database
     public void createPlaylist(Playlists playlist) throws SQLException
     {
         try
@@ -46,7 +46,7 @@ public class PLDAO
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+// This method deletes the selected playlist from our database
     public void deletePlaylist(Playlists playlistToDelete) throws SQLException
     {
         try
@@ -61,7 +61,7 @@ public class PLDAO
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+// This method gets all the playlists that have been stored from our databse, and loads them when you run the program
     public List<Playlists> getAllPlaylists() throws SQLException {
         List<Playlists> p = new ArrayList<>();
         try (Connection con = db.getConnection()){
@@ -79,7 +79,7 @@ public class PLDAO
         }
         return p;
     }
-
+// This method allows us to update our playlist and stores the new and updated information in the database
     public void updatePlaylist(Playlists p) throws SQLException
     {
         try
@@ -95,7 +95,7 @@ public class PLDAO
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+// This method finds the next available ID and gives it to the playlist
     public Integer nextAvailablePlaylistID() throws SQLException
     {
         try
