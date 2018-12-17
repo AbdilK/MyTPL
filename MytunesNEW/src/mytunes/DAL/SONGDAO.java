@@ -56,8 +56,8 @@ public class SONGDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "DELETE FROM Songs WHERE songId = ? ";
-            String sqll = "DELETE FORM PlaylistSongs WHERE PlaylistSongs.SongID = ?"; // NOT FINISH
+            String sql = "DELETE FROM Songs WHERE songId = ?";
+            String sqll = "DELETE FROM PlaylistSongs WHERE PlaylistSongs.SongID = ?"; // NOT FINISH
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setInt(1, song.getsongId());
             ppst.setInt(2, song.getsongId());
@@ -103,7 +103,7 @@ public class SONGDAO
         try
         {
             Connection con = db.getConnection();
-            String sql = "UPDATE Songs SET title=?,artist=?,genre=?, duration=?,songPath=? WHERE id=?";
+            String sql = "UPDATE Songs SET title=?,artist=?,genre=?, duration=?,songPath=? WHERE songId=?";
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setString(1, song.getTitle());
             ppst.setString(2, song.getArtist());

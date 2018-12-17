@@ -579,6 +579,13 @@ public class MainWindowController implements Initializable
         }
     }
 
+    @FXML
+    private void clickRestartSong(ActionEvent event)
+    {
+        mediaPlayer.seek(mediaPlayer.getStartTime());
+        mediaPlayer.play();
+    }
+
    
     private class progressUpdate implements Runnable
     {
