@@ -197,7 +197,7 @@ public class MainWindowController implements Initializable
         if (ToDeleteSong != null)
         {
             String name = ToDeleteSong.getTitle() + " " + ToDeleteSong.getArtist();
-            Alert alert = new Alert(AlertType.CONFIRMATION, "Click YES to delete the chosen song " + name + " from your library and database.\nClick OK to delete song from Database only\nClick NO to cancel your current action", ButtonType.YES, ButtonType.OK, ButtonType.NO);
+            Alert alert = new Alert(AlertType.CONFIRMATION, "Click YES to delete the chosen song " + name + " from the database.\nClick NO to cancel your current action", ButtonType.YES, ButtonType.NO);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.OK)
             {
@@ -401,6 +401,67 @@ public class MainWindowController implements Initializable
         tblViewPlaylists.getItems().clear();
         tblViewPlaylists.setItems(tm.getPlaylistsAsObservable());
     }
+    
+    // This will bind a chosen button to open up our NewSong window
+    public void openSongWindow(String fxmlPath, int id, boolean isEditing)
+    {
+        try
+        {
+            Parent roots;
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
+            roots = (Parent) fxmlLoader.load();
+            fxmlLoader.<NewSongController>getController().setController(this, isEditing, id);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(roots));
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    // This will bind a chosen button to open up our Playlist window
+
+    public void openPlaylistWindow(String fxmlPath, int id, boolean isEditing)
+    {
+        try
+        {
+            Parent roots;
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
+            roots = (Parent) fxmlLoader.load();
+            fxmlLoader.<PlaylistWindowController>getController().setController(this, isEditing, id);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(roots));
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    // This will bind a chosen button to open up our EditSong window
+
+    public void openEditWindow(String fxmlPath, int id, boolean isEditing)
+    {
+        try
+        {
+            Parent roots;
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
+            roots = (Parent) fxmlLoader.load();
+            fxmlLoader.<EditSongController>getController().setController(this, isEditing, id);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(roots));
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     @FXML
     private void clickNewPlaylist(ActionEvent event) throws IOException
@@ -513,36 +574,7 @@ public class MainWindowController implements Initializable
 
     }
 
-    /**
-     * @FXML private void clickToggleUp(MouseEvent event) { if
-     * (ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex() > 0) {
-     * Playlists playlist =
-     * tblViewPlaylists.getSelectionModel().getSelectedItem(); int chosenItem =
-     * ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex(); int
-     * itemToSwapWith = chosenItem - 1; Songs songActual =
-     * ViewSongsOnPlaylist.getSelectionModel().getSelectedItem(); Songs
-     * songToSwapWith = ViewSongsOnPlaylist.getItems().get(itemToSwapWith); if
-     * (songActual.getsongId() != songToSwapWith.getsongId()) {
-     * tm.reCreatePlaylistSongs(songToSwapWith, songActual);
-     * ViewSongsOnPlaylist.getItems().clear();
-     * ViewSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
-     * ViewSongsOnPlaylist.getSelectionModel().select(itemToSwapWith); } } }
-     *
-     * @FXML private void clickToggleDown(MouseEvent event) { int sizeOfPlaylist
-     * = ViewSongsOnPlaylist.getItems().size(); if
-     * (ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex() <
-     * sizeOfPlaylist - 1) { Playlists playlist =
-     * tblViewPlaylists.getSelectionModel().getSelectedItem(); int chosenItem =
-     * ViewSongsOnPlaylist.getSelectionModel().getSelectedIndex(); int
-     * itemToSwapWith = chosenItem + 1; Songs songActual =
-     * ViewSongsOnPlaylist.getSelectionModel().getSelectedItem(); Songs
-     * songToSwapWith = ViewSongsOnPlaylist.getItems().get(itemToSwapWith); if
-     * (songActual.getsongId() != songToSwapWith.getsongId()) {
-     * tm.reCreatePlaylistSongs(songActual, songToSwapWith);
-     * ViewSongsOnPlaylist.getItems().clear();
-     * ViewSongsOnPlaylist.getItems().addAll(tm.getPlaylistSongs(playlist));
-     * ViewSongsOnPlaylist.getSelectionModel().select(itemToSwapWith); } } }
-     */
+    
     @FXML
     private void clickPlaylist(MouseEvent event)
     {
@@ -616,68 +648,5 @@ public class MainWindowController implements Initializable
         {
             return minutes + ":" + seconds;
         }
-    }
-
- 
-
-    // This will bind a chosen button to open up our NewSong window
-    public void openSongWindow(String fxmlPath, int id, boolean isEditing)
-    {
-        try
-        {
-            Parent roots;
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
-            roots = (Parent) fxmlLoader.load();
-            fxmlLoader.<NewSongController>getController().setController(this, isEditing, id);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(roots));
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.centerOnScreen();
-            stage.show();
-        } catch (IOException ex)
-        {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    // This will bind a chosen button to open up our Playlist window
-
-    public void openPlaylistWindow(String fxmlPath, int id, boolean isEditing)
-    {
-        try
-        {
-            Parent roots;
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
-            roots = (Parent) fxmlLoader.load();
-            fxmlLoader.<PlaylistWindowController>getController().setController(this, isEditing, id);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(roots));
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.centerOnScreen();
-            stage.show();
-        } catch (IOException ex)
-        {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    // This will bind a chosen button to open up our EditSong window
-
-    public void openEditWindow(String fxmlPath, int id, boolean isEditing)
-    {
-        try
-        {
-            Parent roots;
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
-            roots = (Parent) fxmlLoader.load();
-            fxmlLoader.<EditSongController>getController().setController(this, isEditing, id);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(roots));
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.centerOnScreen();
-            stage.show();
-        } catch (IOException ex)
-        {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 }
