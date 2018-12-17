@@ -19,7 +19,7 @@ import mytunes.BE.*;
 
 /**
  *
- * @author Hassuni
+ * @author Bjarne666
  */
 public class PLSDAO
 {
@@ -29,8 +29,8 @@ public class PLSDAO
     {
         db = new DBConnectionProvider();
     }
-
-    public List<Songs> getPlaylistSongs(Playlists playlist) throws SQLException // returns all song of selected playlist
+    // returns all the songs of the playlist that have been selected.
+    public List<Songs> getPlaylistSongs(Playlists playlist) throws SQLException 
     {
         List<Songs> songs = new ArrayList<>();
         try
@@ -63,8 +63,8 @@ public class PLSDAO
         return songs;
         
     }
-
-    public void addSongToPlaylist(Songs song, Playlists playlist) throws SQLException
+    // when we select a song and want to insert it into our playlistsongs
+    public void addSongToPlaylist(Songs song, Playlists playlist) throws SQLException 
     {
         try
         {
@@ -79,8 +79,8 @@ public class PLSDAO
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void deleteSongFromPlaylistSongs(int id) throws SQLException  // After we delete song, we want to also delete every record from playlistSongs which is having deleted song id
+    // when we delete song, we also want to delete every trace of it from playlistSongs, which is done by deleting song id.
+    public void deleteSongFromPlaylistSongs(int id) throws SQLException  
     {
         try
         {
@@ -94,8 +94,8 @@ public class PLSDAO
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void deletePlaylistFromPlaylistSongs(int id) throws SQLException // After we delete playlist, we want to also delete every record from playlistSongs which is having deleted playlist id
+    // when we delete a playlist, we want to delete every record from playlistSongs, which is having the deleted playlist id.
+    public void deletePlaylistFromPlaylistSongs(int id) throws SQLException 
     {
         try
         {
@@ -109,8 +109,8 @@ public class PLSDAO
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void reCreatePlaylistSongs(Songs selected, Songs replace) throws SQLException // This method switches positions of two songs in the playlist
+    // This method switches the positions of two songs in the playlist
+    public void reCreatePlaylistSongs(Songs selected, Songs replace) throws SQLException 
     {
         try
         {
