@@ -91,7 +91,7 @@ public class EditSongController implements Initializable {
                 String genre = comboGenre.getSelectionModel().getSelectedItem();
                 String duration = DurationBox.getText();                           
                 String songPath = FilePathBox.getText();
-                tm.createSong(songId, title, artist, genre, duration, songPath);;
+                tm.createSong(songId, title, artist, genre, duration, songPath);
                 MainWController.refreshTableSongs();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
