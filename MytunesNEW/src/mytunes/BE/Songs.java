@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 package mytunes.BE;
-import mytunes.BLL.TunesManager;
-import java.io.File;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
+
+
 
 /**
  *
@@ -26,7 +24,6 @@ public class Songs
     private String readDuration;
     private int playlistUniqueID;
 
-
     public Songs(int songId, String title, String artist, String genre, String duration, String songPath)
     {
         this.songId = songId;
@@ -38,19 +35,16 @@ public class Songs
         //readDuration = readableDuration(this.duration);
     }
 
-    
-
     public Songs()
     {
-      
-    }
-    
 
-    public String getReadDuration() {
+    }
+
+    public String getReadDuration()
+    {
         return readDuration;
     }
 
-    
     public int getPlaylistUniqueID()
     {
         return playlistUniqueID;
@@ -60,7 +54,7 @@ public class Songs
     {
         this.playlistUniqueID = playlistUniqueID;
     }
-    
+
     public int getsongId()
     {
         return songId;
@@ -111,7 +105,6 @@ public class Songs
         this.duration = duration;
     }
 
-    
     public int getLocationID()
     {
         return locationID;
@@ -137,41 +130,7 @@ public class Songs
     {
         String Songs = this.title
                 + " | " + this.artist;
-                
 
         return Songs;
     }
-
-    
-    
-    
-    /**public String readableDuration(int Duration) {
-        String duration;
-        if (Duration != null) {
-            int mili = (int) (Duration / 1000);
-            int sec = (mili / 1000) % 60;
-            int min = (mili / 1000) / 60;
-
-            if (sec < 10) {
-                duration = min + ":" + "0" + sec;
-            } else {
-                duration = min + ":" + sec;
-            }
-
-        } else {
-
-            duration = "";
-        }
-
-        return duration;
-
-    }
-    **/
-    
-    /**
-     * public void playMusic(){ String bip = "src/data/music.mp3"; Media hit =
-     * new Media(new File (bip).toURI().toString()); AudioClip mediaPlayer = new
-     * AudioClip(hit.getSource()); mediaPlayer.play(); 
-}
-     */
 }
