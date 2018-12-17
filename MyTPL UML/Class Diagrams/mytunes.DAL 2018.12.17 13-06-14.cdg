@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="mytunes.DAL">
+  <ClassDiagramComponents>
+    <Class name="DBConnectionProvider" package="mytunes.DAL" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="SERVER_NAME" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="DATABASE_NAME" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="USER" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="PASSWORD" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="db" type="SQLServerDataSource" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getConnection" returnType="Connection" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DALException" package="mytunes.DAL.exception" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="message"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="message"/>
+          <Argument type="Exception" name="ex"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="PLDAO" package="mytunes.DAL" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="db" type="DBConnectionProvider" visibility="private"/>
+        <Field name="DankPlaylist" type="PLSDAO" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="createPlaylist" returnType="void" visibility="public">
+          <Argument type="Playlists" name="playlist"/>
+        </Method>
+        <Method name="deletePlaylist" returnType="void" visibility="public">
+          <Argument type="Playlists" name="playlistToDelete"/>
+        </Method>
+        <Method name="getAllPlaylists" returnType="List&lt;Playlists&gt;" visibility="public"/>
+        <Method name="updatePlaylist" returnType="void" visibility="public">
+          <Argument type="Playlists" name="p"/>
+        </Method>
+        <Method name="nextAvailablePlaylistID" returnType="Integer" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PLSDAO" package="mytunes.DAL" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="db" type="DBConnectionProvider" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getPlaylistSongs" returnType="List&lt;Songs&gt;" visibility="public">
+          <Argument type="Playlists" name="playlist"/>
+        </Method>
+        <Method name="addSongToPlaylist" returnType="void" visibility="public">
+          <Argument type="Songs" name="song"/>
+          <Argument type="Playlists" name="playlist"/>
+        </Method>
+        <Method name="deleteSongFromPlaylistSongs" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="deletePlaylistFromPlaylistSongs" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="reCreatePlaylistSongs" returnType="void" visibility="public">
+          <Argument type="Songs" name="selected"/>
+          <Argument type="Songs" name="replace"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="SONGDAO" package="mytunes.DAL" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="db" type="DBConnectionProvider" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="createSong" returnType="Songs" visibility="public">
+          <Argument type="int" name="songId"/>
+          <Argument type="String" name="title"/>
+          <Argument type="String" name="artist"/>
+          <Argument type="String" name="genre"/>
+          <Argument type="String" name="duration"/>
+          <Argument type="String" name="songPath"/>
+        </Method>
+        <Method name="deleteSong" returnType="void" visibility="public">
+          <Argument type="Songs" name="song"/>
+        </Method>
+        <Method name="getAllSongs" returnType="List&lt;Songs&gt;" visibility="public"/>
+        <Method name="updateSong" returnType="void" visibility="public">
+          <Argument type="Songs" name="song"/>
+        </Method>
+        <Method name="searchSong" returnType="List&lt;Songs&gt;" visibility="public">
+          <Argument type="String" name="query"/>
+        </Method>
+        <Method name="nextAvailableSongID" returnType="Integer" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="db" source="mytunes.DAL.PLSDAO" target="mytunes.DAL.DBConnectionProvider" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="db" source="mytunes.DAL.PLDAO" target="mytunes.DAL.DBConnectionProvider" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="DankPlaylist" source="mytunes.DAL.PLDAO" target="mytunes.DAL.PLSDAO" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="db" source="mytunes.DAL.SONGDAO" target="mytunes.DAL.DBConnectionProvider" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
