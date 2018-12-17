@@ -31,7 +31,7 @@ public class SONGDAO
     {
         db = new DBConnectionProvider();
     }
-
+    ////this code makes it, so you can create a song in the mainwindow
     public Songs createSong(int songId, String title, String artist, String genre, String duration, String songPath) throws SQLException
     {
         {
@@ -51,7 +51,7 @@ public class SONGDAO
             }
         }
     }
-
+    //this code makes, do you can delete a song from your mp3 player.
     public void deleteSong(Songs song) throws SQLException
     {
         try
@@ -75,7 +75,7 @@ public class SONGDAO
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    //this code makes, you will get all songs in one list 
     public List<Songs> getAllSongs() throws SQLException
     {
         List<Songs> songs = new ArrayList<>();
@@ -101,7 +101,7 @@ public class SONGDAO
         }
         return songs;
     }
-
+    //this code makes changes to the mp3 files title, artist EtX.
     public void updateSong(Songs song) throws SQLException
     {
         try
@@ -121,7 +121,7 @@ public class SONGDAO
             Logger.getLogger(SONGDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    //this code allows, so you can search for your songs in the filter 
     public List<Songs> searchSong(String query) throws SQLException
     {
         List<Songs> songs = new ArrayList<>();
@@ -150,7 +150,7 @@ public class SONGDAO
         }
         return songs;
     }
-
+    //this code allows you to switch to the next song, who is available. 
     public Integer nextAvailableSongID() throws SQLException 
     {
         try
