@@ -39,14 +39,14 @@ public class PlaylistWindowController implements Initializable
             NamePlaylist.setText(playlist.getPlaylistName());
         }
     }
-
+// This will close the playlist window
     @FXML
     private void clickCancelPlaylist (ActionEvent event) 
     {
         isEditing = false;
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
-
+// This saves the new data you put in the playlist window
     @FXML
     private void clickSavePlaylist(ActionEvent event) 
     {
@@ -72,7 +72,7 @@ public class PlaylistWindowController implements Initializable
         }
     }
 
-    public void setController(MainWindowController controller, boolean isEditing, int playlistID) 
+    public void setController(MainWindowController controller, boolean isEditing, int playlistID) // This method allows us to get connection with our MainWindowController and will check whether we are creating or editing
     {
         this.MainWController = controller;
         this.isEditing = isEditing;
