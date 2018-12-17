@@ -21,8 +21,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -36,6 +34,10 @@ import mytunes.BE.Songs;
 import mytunes.GUI.model.TuneModel;
 import mytunes.GUI.controller.PlaylistWindowController;
 import mytunes.GUI.controller.EditSongController;
+
+/*
+ * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
+ */
 
 public class MainWindowController implements Initializable
 {
@@ -159,14 +161,12 @@ public class MainWindowController implements Initializable
    // The method underneath gets all playlists from our database and loads it into our playlist library table, with the given string.
     private void setPlaylistTable() 
     {
-
+        playlistSongsCol = new TableColumn<>("ID");    
         playlistNameCol = new TableColumn<>("Name");
-        playlistSongsCol = new TableColumn<>("ID");
+        
         //playlistDurationCol = new TableColumn<>();
-
-        playlistNameCol.setCellValueFactory(new PropertyValueFactory<>("PlaylistName"));
         playlistSongsCol.setCellValueFactory(new PropertyValueFactory<>("PlaylistId"));
-        // playlistDurationCol.setCellValueFactory(new PropertyValueFactory<>("durationOfPlaylist"));'
+        playlistNameCol.setCellValueFactory(new PropertyValueFactory<>("PlaylistName"));
         tblViewPlaylists.setItems(tm.getPlaylistsAsObservable());
         tblViewPlaylists.getColumns().addAll(playlistNameCol, playlistSongsCol);
 
@@ -251,7 +251,7 @@ public class MainWindowController implements Initializable
     private void playSelectedSong() throws UnsupportedAudioFileException, IOException
     {
         
-        if (song == null || song1 == null)
+        if (song == null)
         {
             song = ViewSongsOnPlaylist.getSelectionModel().getSelectedItem();
             song1 = tblViewLibrary.getSelectionModel().getSelectedItem();
@@ -390,6 +390,18 @@ public class MainWindowController implements Initializable
         {
             search();
         }
+    }
+    
+    public void refreshTableSongs()
+    {
+        tblViewLibrary.getItems().clear();
+        tblViewLibrary.setItems(tm.getSongsAsObservable());
+    }
+
+    public void refreshTablePlaylist()
+    {
+        tblViewPlaylists.getItems().clear();
+        tblViewPlaylists.setItems(tm.getPlaylistsAsObservable());
     }
 
     @FXML
@@ -574,7 +586,7 @@ public class MainWindowController implements Initializable
                     Duration currentTime = mediaPlayer.getCurrentTime();
                     double d = currentTime.toSeconds();
                     int i = (int) d;
-                    currentTimeLabel.setText(currentTimeCalculator(i));
+                    currentTimeLabel.setText(currentDurationCalc(i));
                     updateSongDurationCounter(currentTime.toSeconds());
                 });
                 try
@@ -595,7 +607,7 @@ public class MainWindowController implements Initializable
         songProgress.setProgress(fractionalProgress);
     }
 
-    private String currentTimeCalculator(int timeSec)
+    private String currentDurationCalc(int timeSec)
     {
         int minutes = timeSec / 60;
         int seconds = timeSec % 60;
@@ -608,17 +620,7 @@ public class MainWindowController implements Initializable
         }
     }
 
-    public void refreshTableSongs()
-    {
-        tblViewLibrary.getItems().clear();
-        tblViewLibrary.setItems(tm.getSongsAsObservable());
-    }
-
-    public void refreshTablePlaylist()
-    {
-        tblViewPlaylists.getItems().clear();
-        tblViewPlaylists.setItems(tm.getPlaylistsAsObservable());
-    }
+ 
 
     // This will bind a chosen button to open up our NewSong window
     public void openSongWindow(String fxmlPath, int id, boolean isEditing)

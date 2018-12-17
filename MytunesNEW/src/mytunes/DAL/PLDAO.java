@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mytunes.DAL;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -18,6 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mytunes.BE.Playlists;
 import mytunes.BE.Songs;
+
+/*
+ * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
+ */
 
 public class PLDAO
 {

@@ -17,6 +17,10 @@ import javax.swing.JFrame;
 import mytunes.BE.Songs;
 import mytunes.GUI.model.TuneModel;
 
+/*
+ * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
+ */
+
 public class EditSongController implements Initializable {
 
     private TuneModel tm;

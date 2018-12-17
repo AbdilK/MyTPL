@@ -7,7 +7,7 @@ package mytunes.BLL;
 
 /**
  *
- * @author Hassuni
+  * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
  */
 import java.util.List;
 import mytunes.BE.Playlists;

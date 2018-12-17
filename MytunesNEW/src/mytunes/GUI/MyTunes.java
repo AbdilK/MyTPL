@@ -1,7 +1,5 @@
 package mytunes.GUI;
 
-import java.net.URL;
-import java.nio.file.Paths;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,9 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import mytunes.BE.Songs;
-/**
- *
- * @author Abdilk
+
+/*
+ * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
  */
 public class MyTunes extends Application
 {

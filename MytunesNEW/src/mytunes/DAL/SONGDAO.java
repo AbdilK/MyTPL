@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mytunes.DAL;
 
-/**
- *
- * @author Hassuni
+/*
+ * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
  */
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
@@ -59,7 +54,6 @@ public class SONGDAO
             Connection con = db.getConnection();
             //String sql = "DELETE Songs , PlaylistSongs FROM Songs INNER JOIN PlaylistSongs WHERE Songs.songId= PlaylistSongs.SongID AND Songs.songId = ?";
             String sql = "DELETE FROM Songs WHERE songId = ?";
-            // NOT FINISH
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setInt(1, song.getsongId());
             ppst.execute();

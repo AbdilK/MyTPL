@@ -7,7 +7,7 @@ package mytunes.DAL.exception;
 
 /**
  *
- * @author Abdil-K
+ * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
  */
 public class DALException extends Exception
 {

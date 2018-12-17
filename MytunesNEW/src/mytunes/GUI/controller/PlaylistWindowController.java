@@ -13,6 +13,11 @@ import javafx.scene.control.TextField;
 import mytunes.BE.Playlists;
 import mytunes.GUI.model.TuneModel;
 
+/*
+ * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
+ */
+
+
 public class PlaylistWindowController implements Initializable
 {
     private TextField NamePlaylist;

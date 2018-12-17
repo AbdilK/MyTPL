@@ -12,7 +12,7 @@ import java.sql.Connection;
 
 /**
  *
- * @author Abdil-K
+ * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
  */
 public class DBConnectionProvider
 {

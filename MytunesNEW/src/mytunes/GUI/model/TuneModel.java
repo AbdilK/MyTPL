@@ -12,15 +12,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import mytunes.BE.Playlists;
 import mytunes.BE.Songs;
 import mytunes.BLL.TunesManager;
 import mytunes.BLL.BLLLogicFacade;
+
+/*
+ * @author Abdil-K, Bjarne666, Hassuni8, KerimTopci
+ */
+
 
 public class TuneModel {
 
