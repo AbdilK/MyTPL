@@ -83,7 +83,7 @@ public class EditSongController implements Initializable {
     private void clickSaveEditsSong(ActionEvent event) throws IOException // Saving data from SongEditor window
     {
         if (!isEditing) {
-            if (!"".equals(DurationBox.getText()) && !"".equals(ArtistBox.getText()) && comboGenre.getSelectionModel().getSelectedItem() != null
+            if (!"".equals(TitleBox.getText()) && !"".equals(ArtistBox.getText()) && comboGenre.getSelectionModel().getSelectedItem() != null
                     && !"".equals(DurationBox.getText()) && !"".equals(FilePathBox.getText())) {
                 int songId = tm.nextAvailableSongID();
                 String title = TitleBox.getText();
@@ -96,7 +96,7 @@ public class EditSongController implements Initializable {
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         } else {
-            if (!"".equals(DurationBox.getText()) && !"".equals(ArtistBox.getText()) && comboGenre.getSelectionModel().getSelectedItem() != null
+            if (!"".equals(TitleBox.getText()) && !"".equals(ArtistBox.getText()) && comboGenre.getSelectionModel().getSelectedItem() != null
                     && !"".equals(DurationBox.getText()) && !"".equals(FilePathBox.getText())) {
                 int songId = SongNewID;
                 String title = TitleBox.getText();
@@ -104,7 +104,7 @@ public class EditSongController implements Initializable {
                 String genre = comboGenre.getSelectionModel().getSelectedItem();
                 String duration = DurationBox.getText();
                 String songPath = FilePathBox.getText();
-                Songs editSong = new Songs(songId, artist, title, genre, duration, songPath);
+                Songs editSong = new Songs(songId, title, artist, genre, duration, songPath);
                 tm.updateSong(editSong);
                 MainWController.refreshTableSongs();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
